@@ -1,24 +1,32 @@
 {
   "id": "vr-workshop",
-  "title": "VR空間での3Dモデル制作体験",
+  "title": "VR体験（VR空間での3Dモデル制作）",
   "category": "workshop",
-  "subCategories": [],
+  "subCategories": [
+    "collab"
+  ],
   "series": null,
-  "year": null,
+  "year": 2025,
   "dates": [],
-  "dateNote": "実施時期は要確認",
-  "place": null,
-  "target": null,
+  "dateNote": "写真の撮影日は2026年1月21日（保存フォルダ名は「2025.01.22」表記のため正確な実施日は要確認）",
+  "place": "純真高等学校",
+  "target": "高校生",
   "participants": null,
   "teams": null,
   "theme": null,
   "format": "VRを使った3Dモデル制作の体験ワークショップ",
   "tech": [],
   "organizations": [
-    "ideria"
+    "ideria",
+    "junshin"
   ],
-  "summary": "VR空間で3Dモデルづくりを体験するワークショップ。",
-  "description": "VR空間での3Dモデル制作を体験するワークショップです。プレゼン資料が残されています。",
+  "summary": "純真高等学校で実施した、VR空間での3Dモデル制作を体験するワークショップ。",
+  "description": "VRヘッドセットを使い、VR空間の中で3Dモデルづくりを体験するワークショップを純真高等学校で実施しました。体験の様子はスクリーンにも投影し、参加者全員で共有しながら進めました。",
   "researchNote": null,
-  "verification": "実施時期・対象・内容の詳細は要確認"
+  "verification": "実施日の表記が資料間で異なるため要確認（2025.01.22 または 2026.01.21）",
+  "photos": [
+    "/images/activities/vr-workshop/01-vr.jpg",
+    "/images/activities/vr-workshop/02-vr.jpg",
+    "/images/activities/vr-workshop/03-vr.jpg"
+  ]
 }

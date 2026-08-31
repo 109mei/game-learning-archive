@@ -28,7 +28,15 @@
     "ideria"
   ],
   "summary": "2026年8月に実施した最新のゲームジャム。制作と改良の2段階で4作品が完成しました。",
-  "description": "HILL RUSH・machha hunter・バレットバニーなど4作品が制作され、3日後の改良日でそれぞれの作品がバージョンアップされました。制作過程では生成AIのプロンプト記録も行っています。",
+  "description": "HILL RUSH・machha hunter・バレットバニーなど4作品が制作され、3日後の改良日でそれぞれの作品がバージョンアップされました。制作過程では生成AIのプロンプト記録も行っています。 制作ではフローチャートによる設計から始め、完成後は互いの作品を遊んでフィードバックアンケートを交換しました。（設計シートの写真は氏名部分をぼかしています）",
   "researchNote": null,
-  "verification": "開催場所・対象・参加人数は要確認"
+  "verification": "開催場所・対象・参加人数は要確認",
+  "photos": [
+    "/images/activities/game-jam-4/01-flowchart.jpg",
+    "/images/activities/game-jam-4/02-flowchart.jpg",
+    "/images/activities/game-jam-4/03-kaijou.jpg",
+    "/images/activities/game-jam-4/04-test-play.jpg",
+    "/images/activities/game-jam-4/05-feedback.jpg",
+    "/images/activities/game-jam-4/06-feedback.jpg"
+  ]
 }
