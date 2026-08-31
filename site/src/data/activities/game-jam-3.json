@@ -1,0 +1,36 @@
+{
+  "id": "game-jam-3",
+  "title": "第3回ゲームジャム（純真高校）",
+  "category": "game-jam",
+  "subCategories": [
+    "collab"
+  ],
+  "series": {
+    "name": "ゲームジャム",
+    "number": 3
+  },
+  "year": 2025,
+  "dates": [
+    "2025-11-05",
+    "2025-11-12"
+  ],
+  "dateNote": "実施日は推定（要確認）",
+  "place": "純真高等学校",
+  "target": "高校生",
+  "participants": 10,
+  "teams": 5,
+  "theme": null,
+  "format": "素材確認・企画のあとにコード制作を行うチーム制作（指定素材約240点）",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "junshin",
+    "ideria"
+  ],
+  "summary": "高校で実施した高大連携ゲームジャム。高校生10名が5作品を制作しました。",
+  "description": "純真高等学校の生徒10名が参加し、ELECTRO BEAT・SwitchQuiz・チンチロバトルなど5作品を制作しました。素材から企画を考えるアプローチで実施した高大連携の取り組みです。",
+  "researchNote": "研究上の新回次では第2回（高校生）",
+  "verification": "実施日は推定"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "othello-card",
+  "title": "オセロカードゲーム試作",
+  "category": "ideria",
+  "subCategories": [],
+  "series": null,
+  "year": null,
+  "dates": [],
+  "dateNote": "制作時期は要確認",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "アナログカードゲームの企画・試作",
+  "tech": [
+    "analog"
+  ],
+  "organizations": [
+    "ideria"
+  ],
+  "summary": "オセロの考え方をカードにしたアナログゲームの試作プロジェクト。",
+  "description": "オセロのルールをカードゲームに落とし込んだ試作です。アイデアスケッチ・ルール資料・試作カードが残されています。",
+  "researchNote": null,
+  "verification": "制作時期・完成度は要確認"
+}

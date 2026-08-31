@@ -1,0 +1,43 @@
+{
+  "summary": "ピンクのキャラクターでゴールを目指す2Dジャンプアクション。日本語メニューも自作。",
+  "description": null,
+  "controls": "Enterで開始、矢印キーとスペースキーで操作",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj2-2dgame-janmu/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-2dgame-janmu",
+    "entry": "game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r04",
+    "r12"
+  ],
+  "webVersionNote": null,
+  "verification": "予備実施作品か第2回作品か要確認",
+  "id": "gj2-2dgame-janmu",
+  "title": "2Dgameジャンムー"
+}

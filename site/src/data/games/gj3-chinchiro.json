@@ -1,0 +1,45 @@
+{
+  "summary": "サイコロの出目で勝負！チンチロリンをアレンジしたステージ制のダイスバトル。",
+  "description": null,
+  "controls": "Enterで開始、スペースキーでサイコロを振る",
+  "genre": "テーブルゲーム",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-11-12",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒チーム（3名）",
+  "activities": [
+    "game-jam-3",
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-chinchiro/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-chinchiro",
+    "entry": "チンチロバトル 12_10.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r33",
+    "r35"
+  ],
+  "webVersionNote": "フルスクリーン表示を解除しています。",
+  "verification": null,
+  "id": "gj3-chinchiro",
+  "title": "チンチロバトル"
+}

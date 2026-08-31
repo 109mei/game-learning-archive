@@ -1,0 +1,11 @@
+        # --- テキスト表示 ---
+        lines = [
+            "Spaceキーでジャンプ",
+            "背景は自動でスクロールします",
+            "ESCキーでメニューに戻る"
+        ]
+        for i, l in enumerate(lines):
+            txt = font_small.render(l, True, (230, 230, 230))
+            screen.blit(txt, (20, 20 + i * 30))
+
+        pygame.display.flip()

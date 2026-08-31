@@ -1,0 +1,44 @@
+{
+  "summary": "鳥を操って柱の隙間をすり抜ける、チュートリアル付きの避けアクション。",
+  "description": null,
+  "controls": "マウスでメニュー選択、スペースキーで上昇",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-12-20",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒",
+  "activities": [
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-yokero/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-yokero",
+    "entry": "避けろ.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r01",
+    "r06"
+  ],
+  "webVersionNote": null,
+  "verification": null,
+  "id": "gj3-yokero",
+  "title": "避けろ！"
+}

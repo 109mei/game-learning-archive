@@ -1,0 +1,43 @@
+{
+  "summary": "正しいキーを一発で当てられるか？シンプルな一発勝負ミニゲーム。",
+  "description": "ランダムに選ばれたキーを予想して押す、シンプルな運試しゲームです。当たれば「Game Clear」、外れれば「Game Over」。第1回ゲームジャムで生まれた作品です。",
+  "controls": "いずれかのキーを押す（ESCで終了）",
+  "genre": "ミニゲーム",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-05-22",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム（3名）",
+  "activities": [
+    "game-jam-1"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj1-one/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj1-one",
+    "entry": "game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r05",
+    "r32"
+  ],
+  "webVersionNote": "フルスクリーン表示を解除し、メインループをブラウザ用に変換しています。",
+  "verification": null,
+  "id": "gj1-one",
+  "title": "ONE"
+}

@@ -1,0 +1,41 @@
+{
+  "summary": "時間をあやつる大型アクション作品。追加制作期間に生まれた意欲作です。",
+  "description": null,
+  "controls": null,
+  "genre": "アクション",
+  "players": null,
+  "year": 2025,
+  "createdDate": "2025-12-20",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒",
+  "activities": [
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-toki-no-kanrisha",
+    "entry": "時の管理者.py",
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "tkinter（ファイルダイアログ）を使用しているため現状ブラウザ非対応",
+  "id": "gj3-toki-no-kanrisha",
+  "title": "時の管理者"
+}

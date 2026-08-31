@@ -1,0 +1,43 @@
+{
+  "summary": "ビートに乗ってボスに挑む、図形だけで作り上げたボスバトルアクション。",
+  "description": null,
+  "controls": "スペースキーまたはクリック",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-11-12",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒",
+  "activities": [
+    "game-jam-3"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-electro-beat/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-electro-beat",
+    "entry": "electro_beat.py",
+    "note": "公開用にファイル名を変更しています"
+  },
+  "learnTopics": [
+    "r02",
+    "r13"
+  ],
+  "webVersionNote": "日本語フォントを同梱しています。",
+  "verification": null,
+  "id": "gj3-electro-beat",
+  "title": "ELECTRO BEAT"
+}

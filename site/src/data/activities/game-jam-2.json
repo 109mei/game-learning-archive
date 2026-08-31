@@ -1,0 +1,34 @@
+{
+  "id": "game-jam-2",
+  "title": "第2回ゲームジャム",
+  "category": "game-jam",
+  "subCategories": [],
+  "series": {
+    "name": "ゲームジャム",
+    "number": 2
+  },
+  "year": 2025,
+  "dates": [
+    "2025-06-26",
+    "2025-07-03"
+  ],
+  "dateNote": null,
+  "place": "九州情報大学",
+  "target": "大学生",
+  "participants": 16,
+  "teams": null,
+  "theme": null,
+  "format": "第1回と同条件・チーム制作（OneButton・指定素材あり）",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "kiis",
+    "ideria"
+  ],
+  "summary": "16名以上が参加した、大学での第2回ゲームジャム。6作品が生まれました。",
+  "description": "第1回と同じ条件で実施した2回目のゲームジャムです。Flappy Birdやhurdleなど、1ボタンで遊べる多彩なアクションゲームが完成しました。",
+  "researchNote": "研究上の新回次では第1回（内訳B）。参加人数は事前回答16名からの下限値",
+  "verification": "チーム数・一部作品の評価情報は要確認"
+}

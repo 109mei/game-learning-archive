@@ -1,0 +1,44 @@
+{
+  "summary": "「FIRE!」の合図で早撃ち！一瞬の反射神経が勝負の西部劇ガンマン対決。",
+  "description": null,
+  "controls": "合図が出たらスペースキー",
+  "genre": "反射神経",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-05-22",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生",
+  "activities": [
+    "game-jam-1",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj1-quick-draw/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj1-quick-draw",
+    "entry": "Quick_Draw.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r05",
+    "r08"
+  ],
+  "webVersionNote": "音源をogg形式に変換しています。",
+  "verification": "OneButtonGames収録版を掲載",
+  "id": "gj1-quick-draw",
+  "title": "Quick Draw"
+}

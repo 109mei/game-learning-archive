@@ -1,0 +1,42 @@
+{
+  "summary": "1ボタンで走って跳んで坂道を駆け抜けろ！キャラクター選択やスコアボードも備えた大作ランアクション。",
+  "description": null,
+  "controls": "スペースキー：スタート／長押しで走る、ダブルタップでジャンプ",
+  "genre": "ランアクション",
+  "players": "1人",
+  "year": 2026,
+  "createdDate": "2026-08-24",
+  "organizations": [],
+  "creatorDisplay": null,
+  "activities": [
+    "game-jam-4"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": "第4回ゲームジャムで制作され、改良日にバージョンアップされました。生成AIを活用しながら制作されています。",
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj4-hill-rush/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj4-hill-rush",
+    "entry": "main.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r18",
+    "r19",
+    "r35"
+  ],
+  "webVersionNote": "セーブデータはブラウザ内にのみ保存されます。",
+  "verification": "制作チームの人数は要確認",
+  "id": "gj4-hill-rush",
+  "title": "HILL RUSH"
+}

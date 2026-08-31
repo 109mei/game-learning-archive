@@ -1,0 +1,41 @@
+{
+  "summary": "フックを振り子のように操ってアヒルを釣り上げろ！サメに食べられたらゲームオーバーの釣りアクション。",
+  "description": null,
+  "controls": "↑↓で選択、スペース／Enterで決定、スペースキーでフックを操作",
+  "genre": "釣りアクション",
+  "players": "1人",
+  "year": 2026,
+  "createdDate": "2026-08-24",
+  "organizations": [],
+  "creatorDisplay": null,
+  "activities": [
+    "game-jam-4"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": "第4回ゲームジャムで制作され、改良日にバージョンアップされました。",
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj4-machahunter/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj4-machahunter",
+    "entry": "fishing_game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r17",
+    "r24"
+  ],
+  "webVersionNote": "タイマー処理をブラウザ用に置き換えています。",
+  "verification": "制作チームの人数は要確認",
+  "id": "gj4-machahunter",
+  "title": "machha hunter"
+}

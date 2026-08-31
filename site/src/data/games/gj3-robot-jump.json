@@ -1,0 +1,45 @@
+{
+  "summary": "ロボットを走らせてジャンプ＆ホバーで障害物をかわす横スクロールアクション。",
+  "description": null,
+  "controls": "Enterで開始、スペースキーでジャンプ（長押しでホバー）、左右キーで移動",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-11-12",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒チーム（2名）",
+  "activities": [
+    "game-jam-3",
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-robot-jump/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-robot-jump",
+    "entry": "ロボットジャンプ.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r19",
+    "r12"
+  ],
+  "webVersionNote": null,
+  "verification": null,
+  "id": "gj3-robot-jump",
+  "title": "ロボットジャンプ"
+}

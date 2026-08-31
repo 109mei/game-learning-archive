@@ -1,0 +1,28 @@
+{
+  "id": "junshin-followup",
+  "title": "純真高校 追加制作（2025年12月）",
+  "category": "collab",
+  "subCategories": [],
+  "series": null,
+  "year": 2025,
+  "dates": [],
+  "dateNote": "ファイル更新日（2025年12月）に基づく",
+  "place": "純真高等学校",
+  "target": "高校生",
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "ゲームジャム後の作品改良と新規制作",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "junshin",
+    "ideria"
+  ],
+  "summary": "第3回ゲームジャム後に行われた作品のブラッシュアップ。新作2本もここで生まれました。",
+  "description": "ジャム当日の作品が改良されたほか、「時の管理者」「避けろ！」の2作品が新たに加わりました。改良版はOneButtonGamesプロジェクトにも収録されています。",
+  "researchNote": null,
+  "verification": "活動としての位置づけ（第3回の続きか独立した活動か）は要確認"
+}

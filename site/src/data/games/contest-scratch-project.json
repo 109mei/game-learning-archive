@@ -1,0 +1,39 @@
+{
+  "summary": "十人十色ゲームコンテストで制作されたScratch作品。正式な作品名は確認中です。",
+  "description": null,
+  "controls": null,
+  "genre": null,
+  "players": null,
+  "year": 2024,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "匿名参加者",
+  "activities": [
+    "contest-2024"
+  ],
+  "tech": [
+    "scratch"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "正式作品名・公開可否は要確認",
+  "id": "contest-scratch-project",
+  "title": "Scratchのプロジェクト（作品名要確認）"
+}

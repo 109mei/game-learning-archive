@@ -1,0 +1,43 @@
+{
+  "summary": "空飛ぶ男を操作してパイプを避けるフラッピー系アクション。メニューやヘルプ画面も自作。",
+  "description": null,
+  "controls": "スペースキーで上昇（メニューはマウスで選択）",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-07-03",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj2-flyman/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-flyman",
+    "entry": "game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r06",
+    "r04"
+  ],
+  "webVersionNote": "ハイスコアの保存はブラウザを閉じるとリセットされます。",
+  "verification": null,
+  "id": "gj2-flyman",
+  "title": "FlyMan"
+}

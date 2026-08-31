@@ -1,0 +1,40 @@
+{
+  "summary": "弾を避け続ける避けアクションゲーム。",
+  "description": null,
+  "controls": null,
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム（3名）",
+  "activities": [
+    "game-jam-1"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "要確認: ゲーム内に実在人物の写真素材が使われているため、公開可否を確認するまでプレイ・ソース公開を保留。予備実施の作品か第1回の作品かも要確認",
+  "id": "gj1-dodge-the-bullet",
+  "title": "dodge the bullet"
+}

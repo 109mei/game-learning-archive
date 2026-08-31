@@ -1,0 +1,56 @@
+[
+  {
+    "id": "game-jam",
+    "name": "ゲームジャム",
+    "slug": "game-jams",
+    "desc": "短期間でゲームを作り上げるイベント"
+  },
+  {
+    "id": "contest",
+    "name": "ゲームコンテスト",
+    "slug": "contests",
+    "desc": "作品を持ち寄って発表するコンテスト"
+  },
+  {
+    "id": "class",
+    "name": "ゲームプログラミング授業",
+    "slug": "classes",
+    "desc": "授業で使った教材と成果"
+  },
+  {
+    "id": "collab",
+    "name": "高大連携",
+    "slug": "collabs",
+    "desc": "高校と大学が連携した制作活動"
+  },
+  {
+    "id": "ideria",
+    "name": "IDERIA制作",
+    "slug": "ideria",
+    "desc": "IDERIAが企画・制作したゲームとプロジェクト"
+  },
+  {
+    "id": "personal",
+    "name": "自主制作",
+    "slug": "personal",
+    "desc": "個人の自主制作"
+  },
+  {
+    "id": "exhibit",
+    "name": "展示",
+    "slug": "exhibits",
+    "desc": "学園祭などでの展示"
+  },
+  {
+    "id": "workshop",
+    "name": "ワークショップ",
+    "slug": "workshops",
+    "desc": "体験型ワークショップ"
+  },
+  {
+    "id": "other",
+    "name": "その他",
+    "slug": "others",
+    "desc": "その他の活動"
+  }
+]

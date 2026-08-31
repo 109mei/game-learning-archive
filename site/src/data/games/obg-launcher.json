@@ -1,0 +1,40 @@
+{
+  "summary": "高校生・大学生が作った1ボタンゲーム10作品を収録した専用ランチャー。",
+  "description": null,
+  "controls": null,
+  "genre": "ゲームコレクション",
+  "players": null,
+  "year": 2025,
+  "createdDate": null,
+  "organizations": [
+    "ideria"
+  ],
+  "creatorDisplay": "IDERIA",
+  "activities": [
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": true,
+    "dir": "obg-launcher",
+    "entry": "OneButtonGames.py",
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "大規模なランチャーのためブラウザ版は今後対応予定。収録ゲームは各作品ページから個別に遊べます",
+  "id": "obg-launcher",
+  "title": "OneButtonGames（ランチャー）"
+}

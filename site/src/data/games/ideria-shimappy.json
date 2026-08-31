@@ -1,0 +1,39 @@
+{
+  "summary": "しまっぴー先生と一緒に歴史上の人物を覚えるクイズゲーム。TyranoScript製。",
+  "description": null,
+  "controls": null,
+  "genre": "クイズ",
+  "players": "1人",
+  "year": null,
+  "createdDate": null,
+  "organizations": [
+    "ideria"
+  ],
+  "creatorDisplay": "IDERIA（永野斗遠）",
+  "activities": [
+    "shimappy-project"
+  ],
+  "tech": [
+    "tyranoscript"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "TyranoScriptのブラウザ書き出しに今後対応予定。制作時期は要確認",
+  "id": "ideria-shimappy",
+  "title": "しまっぴー先生の覚えてクイズ"
+}

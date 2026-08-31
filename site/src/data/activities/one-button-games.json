@@ -1,0 +1,31 @@
+{
+  "id": "one-button-games",
+  "title": "OneButtonGamesプロジェクト",
+  "category": "collab",
+  "subCategories": [
+    "ideria"
+  ],
+  "series": null,
+  "year": 2025,
+  "dates": [],
+  "dateNote": "企画書2026年1月・ランチャー最終更新2026年7月",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": "1ボタンで遊べるゲームを集める",
+  "format": "IDERIA×純真高等学校×九州情報大学の合同プロジェクト",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "ideria",
+    "junshin",
+    "kiis"
+  ],
+  "summary": "高校生・大学生が作った1ボタンゲームを、専用ランチャーから遊べるようにまとめた高大連携プロジェクト。",
+  "description": "ゲームジャムなどで生まれた「1ボタンで遊べるゲーム」を1つのランチャーに収録したプロジェクトです。純真高等学校の6作品と九州情報大学の4作品を収録し、デモ映像や企画書も制作されました。",
+  "researchNote": null,
+  "verification": "応募・発表先の詳細は要確認"
+}

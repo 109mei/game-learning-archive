@@ -1,0 +1,45 @@
+{
+  "summary": "スペースキーで○×を切り替えて答える1ボタンクイズゲーム。",
+  "description": null,
+  "controls": "スペースキーで○×切りかえ（時間切れで自動判定）、R:リトライ",
+  "genre": "クイズ",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-11-12",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒チーム（2名）",
+  "activities": [
+    "game-jam-3",
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-switch-quiz/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-switch-quiz",
+    "entry": "Switch Quiz.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r05",
+    "r33"
+  ],
+  "webVersionNote": null,
+  "verification": null,
+  "id": "gj3-switch-quiz",
+  "title": "SwitchQuiz"
+}

@@ -1,0 +1,28 @@
+Please refactor and optimize the Pygame fishing game code in `ensyuu.py` into a clean, concise script (under 280 lines) saved as `fish.py`. The refactoring must integrate custom external assets, align the graphics naturally, and utilize code patterns from the `z` folder.
+
+Follow these specific instructions:
+
+1. **Asset Integration**:
+   - Background: Load `background.png` scaled to `900x600`.
+   - Boat: Load `boat.png` scaled to `180x75`. Place it at `boat_x = WIDTH // 2` and `boat_y = 150`.
+   - Person: Load `person.png` scaled to `70x70` and position it sitting on the boat at `(boat_x - 35, boat_y - 55)`.
+   - Hook: Load `hook.png` scaled to `40x42` and draw it centered horizontally below the fishing line at `(hook_x - 20, hook_y)`.
+   - BGM: Load and play `2.mp3` in a loop.
+   - SFX: Load and play `catch.wav` when catching a fish.
+   - Image fallback: Wrap all asset loaders in try-except blocks so the game falls back to vector shapes/empty audio if files are missing.
+
+2. **Water Line & Spawning Alignment**:
+   - Since the pool background image has its water line around y=230, position the boat bottom at `y=225`.
+   - Set the hook's resting position to `y=235`. Update the collision box of the hook to `40x42` to match the claw, and suspend caught fish directly below it at `hook_y + 42`.
+   - Set the spawning range of all fish and sharks to swim entirely underwater between `y=260` and `y=500` so that they remain submerged.
+   - Remove all old horizontal vector water line drawing logic.
+
+3. **Code Shortening & Consolidation**:
+   - Merge the `Fish` and `Shark` classes into a single, clean `Fish` class, taking a `fish_type` parameter (e.g. `Fish("Shark")`).
+   - Remove the cluttered rules text block on the top-left, showing only the Score and Time in `BLACK` font for high visibility against the light blue sky.
+   - Replace long, repetitive drawing calls with loops over coordinate list parameters.
+
+4. **Reference Code Patterns from `z/`**:
+   - Implement the platform display settings (DPI scaling for Windows, centering for macOS/Linux) matching the templates in the `z/` folder.
+   - Implement the font loader to check for `z/NotoSansJP-Regular.ttf` before falling back to system default fonts.
+   - Implement background music (BGM) toggle pausing/resuming with the 'M' key, utilizing `pygame.mixer.music` code styles from `z/ãtà¯Ç´ÉRÅ[Éh/17_âπäyå¯â âπçƒê∂,É`ÉÉÉìÉlÉã.py`.

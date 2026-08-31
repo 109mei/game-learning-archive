@@ -1,0 +1,43 @@
+{
+  "summary": "羽ばたいてパイプの隙間をくぐり抜けろ！おなじみのフラッピーアクション。",
+  "description": null,
+  "controls": "スペースキーまたはクリックで羽ばたく、Rでリスタート",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-07-03",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj2-flappy-bird/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-flappy-bird",
+    "entry": "Flappy Bird.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r01",
+    "r34"
+  ],
+  "webVersionNote": "音源をogg形式に変換しています。",
+  "verification": null,
+  "id": "gj2-flappy-bird",
+  "title": "Flappy Bird"
+}

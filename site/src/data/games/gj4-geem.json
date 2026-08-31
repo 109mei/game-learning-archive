@@ -1,0 +1,41 @@
+{
+  "summary": "飛び回るアヒルにカーソルを合わせて左クリックで撃ち抜くガンシューティング。",
+  "description": null,
+  "controls": "マウスで狙って左クリック",
+  "genre": "シューティング",
+  "players": "1人",
+  "year": 2026,
+  "createdDate": "2026-08-24",
+  "organizations": [],
+  "creatorDisplay": null,
+  "activities": [
+    "game-jam-4"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj4-geem/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj4-geem",
+    "entry": "geem.py",
+    "note": "公開用に拡張子を修正しています"
+  },
+  "learnTopics": [
+    "r09",
+    "r10"
+  ],
+  "webVersionNote": null,
+  "verification": "要確認: 修正前の「ダックハント」と同一作品かどうか。正式な作品名も要確認",
+  "id": "gj4-geem",
+  "title": "geem（ダックハント）"
+}

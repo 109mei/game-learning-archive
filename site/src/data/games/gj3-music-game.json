@@ -1,0 +1,45 @@
+{
+  "summary": "流れてくる矢印が判定ラインに来たらエンター！シンプルで熱いリズムゲーム。",
+  "description": null,
+  "controls": "スペースキーでスタート、中央列で矢印が判定ラインに来たらEnter",
+  "genre": "リズムゲーム",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-11-12",
+  "organizations": [
+    "junshin"
+  ],
+  "creatorDisplay": "純真高等学校の生徒チーム（2名）",
+  "activities": [
+    "game-jam-3",
+    "junshin-followup",
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj3-music-game/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj3-music-game",
+    "entry": "音楽ゲーム.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r13",
+    "r17"
+  ],
+  "webVersionNote": null,
+  "verification": null,
+  "id": "gj3-music-game",
+  "title": "音楽ゲーム"
+}

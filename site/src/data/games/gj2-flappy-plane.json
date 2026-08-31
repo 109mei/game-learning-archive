@@ -1,0 +1,43 @@
+{
+  "summary": "飛行機を操って障害物をかわすフラッピー系アクション。",
+  "description": null,
+  "controls": "スペースキーで上昇",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-07-03",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj2-flappy-plane/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-flappy-plane",
+    "entry": "flappy_plane.PY",
+    "note": null
+  },
+  "learnTopics": [
+    "r01",
+    "r03"
+  ],
+  "webVersionNote": null,
+  "verification": "第2回作品としての位置づけは資料上の要確認あり",
+  "id": "gj2-flappy-plane",
+  "title": "flappy plane"
+}

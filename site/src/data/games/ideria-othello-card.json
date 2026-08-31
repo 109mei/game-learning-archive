@@ -1,0 +1,39 @@
+{
+  "summary": "オセロの「はさんでひっくり返す」快感をカードで再現する試作ゲーム。",
+  "description": null,
+  "controls": null,
+  "genre": "カードゲーム",
+  "players": "2人",
+  "year": null,
+  "createdDate": null,
+  "organizations": [
+    "ideria"
+  ],
+  "creatorDisplay": "IDERIA",
+  "activities": [
+    "othello-card"
+  ],
+  "tech": [
+    "analog"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "試作段階。ルール・完成度は要確認",
+  "id": "ideria-othello-card",
+  "title": "オセロカードゲーム"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "chokopaki-project",
+  "title": "チョコパキ!制作・おもちゃ化",
+  "category": "ideria",
+  "subCategories": [],
+  "series": null,
+  "year": null,
+  "dates": [],
+  "dateNote": "制作時期は要確認",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "IDERIAによるオリジナルゲーム制作（デジタル版とアナログおもちゃ版）",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "ideria"
+  ],
+  "summary": "板チョコを割り合う対戦ゲーム「チョコパキ!」の制作と、おもちゃ化の取り組み。",
+  "description": "チョコレートを割り合ってスコアを競うIDERIAオリジナルの対戦ゲームです。pygameによるデジタル版のほか、3Dプリンターを使ったおもちゃ化の検討も行いました。",
+  "researchNote": null,
+  "verification": "制作時期・展示歴は要確認"
+}

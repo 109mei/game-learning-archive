@@ -1,0 +1,43 @@
+{
+  "summary": "板チョコをパキパキ割り合ってスコアを競う、IDERIAオリジナルの対戦ゲーム。AI対戦も搭載。",
+  "description": null,
+  "controls": "マウスで操作（スタート画面から難易度を選択）",
+  "genre": "対戦パズル",
+  "players": "1〜2人",
+  "year": null,
+  "createdDate": null,
+  "organizations": [
+    "ideria"
+  ],
+  "creatorDisplay": "IDERIA（永野斗遠）",
+  "activities": [
+    "chokopaki-project"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": "IDERIAのオリジナル作品として制作され、3Dプリンターによるおもちゃ化も検討されました。",
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/ideria-chokopaki/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "ideria-chokopaki",
+    "entry": "game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r20",
+    "r33"
+  ],
+  "webVersionNote": "フルスクリーン表示を解除し、日本語フォントを差し替えています。",
+  "verification": "制作年度は要確認",
+  "id": "ideria-chokopaki",
+  "title": "チョコパキ!"
+}

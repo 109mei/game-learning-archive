@@ -1,0 +1,39 @@
+{
+  "summary": "十人十色ゲームコンテストで制作されたScratch作品。",
+  "description": null,
+  "controls": null,
+  "genre": null,
+  "players": null,
+  "year": 2024,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "匿名参加者",
+  "activities": [
+    "contest-2024"
+  ],
+  "tech": [
+    "scratch"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "Scratch作品(.sb3)の公開方法・公開可否は要確認",
+  "id": "contest-usagi",
+  "title": "ウサギの島点取りゲーム"
+}

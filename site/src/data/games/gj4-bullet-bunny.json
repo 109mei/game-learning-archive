@@ -1,0 +1,41 @@
+{
+  "summary": "ウサギを操って敵の弾幕をかいくぐるレベル制アクション。",
+  "description": null,
+  "controls": "スペースキーでスタート・操作",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2026,
+  "createdDate": "2026-08-24",
+  "organizations": [],
+  "creatorDisplay": null,
+  "activities": [
+    "game-jam-4"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": "第4回ゲームジャムで制作され、改良日にバージョンアップされました。生成AIを活用しながら制作されています。",
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj4-bullet-bunny/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj4-bullet-bunny",
+    "entry": "バレッドバニー.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r11",
+    "r01"
+  ],
+  "webVersionNote": null,
+  "verification": "制作チームの人数は要確認",
+  "id": "gj4-bullet-bunny",
+  "title": "バレットバニー"
+}

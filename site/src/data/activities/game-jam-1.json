@@ -1,0 +1,34 @@
+{
+  "id": "game-jam-1",
+  "title": "第1回ゲームジャム",
+  "category": "game-jam",
+  "subCategories": [],
+  "series": {
+    "name": "ゲームジャム",
+    "number": 1
+  },
+  "year": 2025,
+  "dates": [
+    "2025-05-15",
+    "2025-05-22"
+  ],
+  "dateNote": null,
+  "place": "九州情報大学",
+  "target": "大学生",
+  "participants": 9,
+  "teams": 4,
+  "theme": null,
+  "format": "1週間間隔の2回の活動に分けてチーム制作（OneButton・指定素材あり）",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "kiis",
+    "ideria"
+  ],
+  "summary": "大学生9名が参加した、大学での第1回ゲームジャム。",
+  "description": "Python（pygame）と指定素材を使い、2回の活動でゲームを完成させる形式で実施しました。実行性・テーマ性・効率・創造性などの観点で作品を評価しています。",
+  "researchNote": "研究上の新回次では第1回（内訳A）",
+  "verification": null
+}

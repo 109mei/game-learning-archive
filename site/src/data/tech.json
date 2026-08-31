@@ -1,0 +1,11 @@
+{
+  "python": "Python",
+  "pygame": "pygame / pygame-ce",
+  "pygame-zero": "Pygame Zero",
+  "scratch": "Scratch",
+  "unity": "Unity (C#)",
+  "ue4": "Unreal Engine 4",
+  "tyranoscript": "TyranoScript",
+  "analog": "アナログゲーム",
+  "ai": "生成AI活用"
+}

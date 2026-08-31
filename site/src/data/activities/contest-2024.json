@@ -1,0 +1,31 @@
+{
+  "id": "contest-2024",
+  "title": "十人十色ゲームコンテスト",
+  "category": "contest",
+  "subCategories": [],
+  "series": {
+    "name": "十人十色ゲームコンテスト",
+    "number": 1
+  },
+  "year": 2024,
+  "dates": [],
+  "dateNote": "2024年開催（月日は要確認）",
+  "place": "九州情報大学",
+  "target": "大学生",
+  "participants": 4,
+  "teams": null,
+  "theme": null,
+  "format": "約1〜3か月かけて個人で企画・制作し、作品を持ち寄って発表",
+  "tech": [
+    "scratch",
+    "unity"
+  ],
+  "organizations": [
+    "kiis",
+    "ideria"
+  ],
+  "summary": "一人ひとり違う「十人十色」の作品づくりに挑戦した、ゲームジャム以前の前段となるコンテスト。",
+  "description": "大学生4名がそれぞれ数か月かけて1作品を制作し、アイデア面・プログラム面の2軸で相互評価を行いました。ScratchやUnityなど使用ツールも自由で、ここでの経験がその後のゲームジャム設計につながっています。",
+  "researchNote": "研究上は「前段コンテスト」",
+  "verification": "開催月日・受賞情報は要確認"
+}

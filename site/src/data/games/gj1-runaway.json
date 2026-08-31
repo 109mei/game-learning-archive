@@ -1,0 +1,43 @@
+{
+  "summary": "迫りくる敵から5秒間逃げ切れ！シンプルな避けアクション。",
+  "description": null,
+  "controls": "Enterで開始、矢印キーで移動",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-05-22",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム（2名）",
+  "activities": [
+    "game-jam-1"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj1-runaway/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj1-runaway",
+    "entry": "jamgame.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r01",
+    "r04"
+  ],
+  "webVersionNote": "画像パスの区切り文字を修正し、未使用のnumpyを無効化しています。",
+  "verification": null,
+  "id": "gj1-runaway",
+  "title": "runaway!"
+}

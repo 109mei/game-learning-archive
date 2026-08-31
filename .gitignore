@@ -1,0 +1,12 @@
+# ビルド出力（node site/build.mjs で再生成できます）
+site/dist/
+# pygbagのローカルビルド（成果物は site/public/play-files/ に配置済み）
+web_versions/*/build/
+web_versions/*/build-web/
+# 一時ファイル
+_to_delete/
+_stage/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

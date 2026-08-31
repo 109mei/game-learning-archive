@@ -1,0 +1,118 @@
+シューティングゲーム作成
+　クロスヘアが敵にあったらスペースをおして敵を倒す。
+必要素材
+　１背景画像
+　２敵の画像
+　３クロスヘアになる画像
+順序
+　　
+　1　ゲーム開始（クロスヘアが中央にある状態、敵6体が出現する）
+　2　クロスヘアがてきにむかって移動
+　3　敵とクロスヘアが重なっったときに、スペースが押されると敵が消える。スペースがタイミングよく押されなかったら敵は残る。
+　4　１体倒すごとに10ポイントプラスされていき、右上に表示される。
+　5　４体目を倒すとてきは倒した順に復活する。
+　6　3番から5番までくりかえす。１００ポイントたまると終了。
+　7　１００ポイントたまると終了。
+
+
+show_start_screen()
+
+#メインループ
+running = True    #変数をrunningにTrueを代入
+while running:    #変数runningがTrueである間繰り返す（他の変数名、Trueだけでも可）
+
+    # メイン中だけBGM再生
+    if not bgm_playing:
+        pygame.mixer.music.play(-1)  # ループ再生
+        bgm_playing = True
+
+
+    clock.tick(60)  #フレームレート（fps）を60に制限
+    
+    #イベント取得
+    for event in pygame.event.get(): #もし何か（キーが押された、マウスが動いた、クリックされた等）が起きた場合を検知
+        if event.type == pygame.QUIT: #もしウィンドウの×ボタンが押されたなら（フルスクリーンでは表示不可）
+            running = False #変数runningにFalseを代入（runningがTrueではないためメインループが終了する）
+        if event.type == pygame.KEYDOWN: #もし何かキーが押されたなら
+            if event.key == pygame.K_ESCAPE: #押されたキーがもしエスケープキーなら
+                running = False  #変数runningにFalseを代入（runningがTrueではないためメインループが終了する）
+
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            # 当たり判定
+            for i, (ex, ey) in enumerate(enemies):
+                rect_e = enemy_img.get_rect(center=(ex, ey))
+                rect_c = crosshair_img.get_rect(center=(cross_x, cross_y))
+
+                if rect_c.colliderect(rect_e):
+                    score += 10
+                    killed_order.append([ex, ey])
+                    del enemies[i]
+                    break
+
+
+    #クロスヘア自動移動
+    if enemies:
+        # 一番近い敵を探す
+        target = min(enemies,key=lambda e: math.hypot(e[0] - cross_x, e[1] - cross_y))
+
+        tx, ty = target
+
+        # 敵方向のベクトル
+        dx = tx - cross_x
+        dy = ty - cross_y
+        dist = math.hypot(dx, dy)
+
+        if dist != 0:
+            cross_x += (dx / dist) * cross_speed
+            cross_y += (dy / dist) * cross_speed
+
+         # 通り過ぎたら次の敵へ
+        if dist < 5:
+            hp -=10
+            killed_order.append([tx, ty])  # 通過扱い
+            enemies.remove(target)
+
+    #10体倒したら復活
+    if len(killed_order) >= 10:
+        enemies.append(killed_order.pop(0))
+
+
+    #クリアの点数
+    if score >= 150:
+        pygame.mixer.music.stop()
+        game_result = "クリア"
+        running = False
+        break
+
+    if hp <= 0:
+        pygame.mixer.music.stop()
+        game_result = "ゲームオーバー"
+        running = False
+        break
+
+
+
+    #描画 
+    screen.blit(bg_img, (0, 0))
+    for ex, ey in enemies:
+        screen.blit(enemy_img, enemy_img.get_rect(center=(ex, ey)))
+
+    screen.blit(crosshair_img, crosshair_img.get_rect(center=(cross_x, cross_y)))
+
+    #hp
+    hp_text = font.render(f"HP: {hp}", True, (200, 0, 0))
+    screen.blit(hp_text, (500, 20))
+
+    # スコア
+    score_text = font.render(f"Score: {score}", True, (0, 0, 0))
+    screen.blit(score_text, (300, 20))
+
+    title = font.render("シューティングゲーム", True, (0,0,0))  
+    screen.blit(title, (10, 20))
+
+    
+
+
+    pygame.display.update()
+　
+

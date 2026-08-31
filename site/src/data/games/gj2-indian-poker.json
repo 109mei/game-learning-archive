@@ -1,0 +1,40 @@
+{
+  "summary": "インディアンポーカーをテーマにした制作途中の作品。カード画像62枚を用意。",
+  "description": null,
+  "controls": null,
+  "genre": "カードゲーム",
+  "players": null,
+  "year": 2025,
+  "createdDate": "2025-07-03",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-indian-poker",
+    "entry": "indian poker.py",
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "原作は画面描画が未実装のためブラウザプレイは非対応（ソースのみ公開）",
+  "id": "gj2-indian-poker",
+  "title": "indian poker"
+}

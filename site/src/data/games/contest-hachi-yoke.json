@@ -1,0 +1,39 @@
+{
+  "summary": "ハチをよけて生き延びるScratch製アクションゲーム。十人十色ゲームコンテスト出品作。",
+  "description": null,
+  "controls": null,
+  "genre": "アクション",
+  "players": null,
+  "year": 2024,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "永野斗遠",
+  "activities": [
+    "contest-2024"
+  ],
+  "tech": [
+    "scratch"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "Scratch作品(.sb3)のブラウザ公開（TurboWarp等）は今後対応予定",
+  "id": "contest-hachi-yoke",
+  "title": "ハチ避け"
+}

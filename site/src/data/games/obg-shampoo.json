@@ -1,0 +1,43 @@
+{
+  "summary": "ちょうどいい量のシャンプーを出せるか？連打のさじ加減が問われる1ボタンゲーム。",
+  "description": null,
+  "controls": "Enterで開始、スペースキー連打で量を調整",
+  "genre": "タイミングゲーム",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": null,
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生",
+  "activities": [
+    "one-button-games"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/obg-shampoo/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "obg-shampoo",
+    "entry": "shampoo.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r08",
+    "r30"
+  ],
+  "webVersionNote": null,
+  "verification": "制作された活動は要確認",
+  "id": "obg-shampoo",
+  "title": "shampoo"
+}

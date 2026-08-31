@@ -1,0 +1,24 @@
+{
+  "id": "vr-workshop",
+  "title": "VR空間での3Dモデル制作体験",
+  "category": "workshop",
+  "subCategories": [],
+  "series": null,
+  "year": null,
+  "dates": [],
+  "dateNote": "実施時期は要確認",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "VRを使った3Dモデル制作の体験ワークショップ",
+  "tech": [],
+  "organizations": [
+    "ideria"
+  ],
+  "summary": "VR空間で3Dモデルづくりを体験するワークショップ。",
+  "description": "VR空間での3Dモデル制作を体験するワークショップです。プレゼン資料が残されています。",
+  "researchNote": null,
+  "verification": "実施時期・対象・内容の詳細は要確認"
+}

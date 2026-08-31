@@ -1,0 +1,34 @@
+{
+  "id": "game-jam-4",
+  "title": "第4回ゲームジャム",
+  "category": "game-jam",
+  "subCategories": [],
+  "series": {
+    "name": "ゲームジャム",
+    "number": 4
+  },
+  "year": 2026,
+  "dates": [
+    "2026-08-21"
+  ],
+  "dateNote": "8月21日に実施、8月24日に作品の改良を実施",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "制作後に修正日を設けて作品を改良する2段階形式。生成AIも活用",
+  "tech": [
+    "python",
+    "pygame",
+    "ai"
+  ],
+  "organizations": [
+    "kiis",
+    "ideria"
+  ],
+  "summary": "2026年8月に実施した最新のゲームジャム。制作と改良の2段階で4作品が完成しました。",
+  "description": "HILL RUSH・machha hunter・バレットバニーなど4作品が制作され、3日後の改良日でそれぞれの作品がバージョンアップされました。制作過程では生成AIのプロンプト記録も行っています。",
+  "researchNote": null,
+  "verification": "開催場所・対象・参加人数は要確認"
+}

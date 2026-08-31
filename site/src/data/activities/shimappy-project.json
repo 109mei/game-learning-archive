@@ -1,0 +1,26 @@
+{
+  "id": "shimappy-project",
+  "title": "しまっぴー先生の覚えてクイズ制作",
+  "category": "ideria",
+  "subCategories": [],
+  "series": null,
+  "year": null,
+  "dates": [],
+  "dateNote": "制作時期は要確認",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "TyranoScriptによるクイズゲーム制作",
+  "tech": [
+    "tyranoscript"
+  ],
+  "organizations": [
+    "ideria"
+  ],
+  "summary": "歴史上の人物を楽しく覚えるクイズゲームの制作プロジェクト。",
+  "description": "菅原道真などの歴史人物を、解説キャラ「しまっぴー先生」と一緒に学べるクイズゲームです。TyranoScriptで制作されています。",
+  "researchNote": null,
+  "verification": "制作時期・提出先コンテストは要確認"
+}

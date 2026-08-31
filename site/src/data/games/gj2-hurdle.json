@@ -1,0 +1,43 @@
+{
+  "summary": "走ってハードルを跳び越えろ！タイミングが命の陸上アクション。",
+  "description": null,
+  "controls": "スペースキーでジャンプ",
+  "genre": "アクション",
+  "players": "1人",
+  "year": 2025,
+  "createdDate": "2025-07-03",
+  "organizations": [
+    "kiis"
+  ],
+  "creatorDisplay": "九州情報大学の学生チーム",
+  "activities": [
+    "game-jam-2"
+  ],
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": true,
+    "url": "/play-files/gj2-hurdle/index.html",
+    "note": "読み込みに少し時間がかかります。音が出ないときは一度画面をクリックしてください。"
+  },
+  "source": {
+    "available": true,
+    "dir": "gj2-hurdle",
+    "entry": "game.py",
+    "note": null
+  },
+  "learnTopics": [
+    "r01",
+    "r18"
+  ],
+  "webVersionNote": null,
+  "verification": null,
+  "id": "gj2-hurdle",
+  "title": "hurdle"
+}

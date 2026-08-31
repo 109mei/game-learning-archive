@@ -1,0 +1,35 @@
+{
+  "id": "game-jam-pre",
+  "title": "嘉穂総合高校ゲームジャム（予備実施）",
+  "category": "game-jam",
+  "subCategories": [
+    "collab"
+  ],
+  "series": {
+    "name": "ゲームジャム",
+    "number": 0
+  },
+  "year": 2024,
+  "dates": [
+    "2025-03-18"
+  ],
+  "dateNote": null,
+  "place": "福岡県立嘉穂総合高等学校",
+  "target": "高校生",
+  "participants": 4,
+  "teams": 2,
+  "theme": null,
+  "format": "1日・チーム制作（OneButton・指定素材あり）",
+  "tech": [
+    "python",
+    "pygame"
+  ],
+  "organizations": [
+    "kaho",
+    "ideria"
+  ],
+  "summary": "高校での1日ゲームジャム。以後のゲームジャムの原型になった予備実施です。",
+  "description": "高校生4名が2チームに分かれ、Python（pygame）と指定素材を使って1日でゲーム制作に挑戦しました。1作品が完成、1作品が未完成という結果も含めて、その後の運営改善につながっています。",
+  "researchNote": "研究上は「予備実験」",
+  "verification": null
+}

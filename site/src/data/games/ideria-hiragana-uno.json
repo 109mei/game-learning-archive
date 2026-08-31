@@ -1,0 +1,39 @@
+{
+  "summary": "ひらがなカードでしりとりバトル！印刷して遊べるアナログカードゲーム。",
+  "description": null,
+  "controls": null,
+  "genre": "カードゲーム",
+  "players": "2人〜",
+  "year": null,
+  "createdDate": null,
+  "organizations": [
+    "ideria"
+  ],
+  "creatorDisplay": "IDERIA",
+  "activities": [
+    "hiragana-uno"
+  ],
+  "tech": [
+    "analog"
+  ],
+  "thumbnail": null,
+  "screenshots": [],
+  "background": null,
+  "highlights": null,
+  "play": {
+    "playable": false,
+    "url": null,
+    "note": null
+  },
+  "source": {
+    "available": false,
+    "dir": null,
+    "entry": null,
+    "note": null
+  },
+  "learnTopics": [],
+  "webVersionNote": null,
+  "verification": "制作時期は要確認",
+  "id": "ideria-hiragana-uno",
+  "title": "ひらがなUNO（SHIRITORI）"
+}

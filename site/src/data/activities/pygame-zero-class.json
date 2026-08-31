@@ -1,0 +1,27 @@
+{
+  "id": "pygame-zero-class",
+  "title": "pygame zero 授業",
+  "category": "class",
+  "subCategories": [],
+  "series": null,
+  "year": null,
+  "dates": [],
+  "dateNote": "実施時期は要確認",
+  "place": null,
+  "target": null,
+  "participants": null,
+  "teams": null,
+  "theme": null,
+  "format": "Pygame Zeroを使ったゲームプログラミング授業",
+  "tech": [
+    "python",
+    "pygame-zero"
+  ],
+  "organizations": [
+    "ideria"
+  ],
+  "summary": "Pygame Zeroで画像を動かすところから始めるゲームプログラミング授業。",
+  "description": "スライド教材とサンプルコード（画像配置・ゲーム見本など）を使って、初心者がゲームプログラミングを体験する授業です。",
+  "researchNote": null,
+  "verification": "対象・実施時期は要確認"
+}
