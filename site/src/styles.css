@@ -17,6 +17,7 @@
   --shadow:0 2px 12px rgba(0,0,0,.45);
   --shadow-hover:0 12px 30px rgba(0,0,0,.6);
   --radius:14px;
+  --thumb-bg:#081521;
   --code-bg:#050e18; --code-tx:#d7e2ec;
   --sea-1:#0a2438; --sea-2:#061a2b; --sea-3:#030f1c; --sea-4:#01070f;
   --layer-ink:1,8,16;
@@ -37,6 +38,7 @@ html[data-theme="light"]{
   --learn:#15598f; --learn-soft:#deecfa;
   --shadow:0 2px 10px rgba(13,35,51,.08);
   --shadow-hover:0 10px 26px rgba(13,35,51,.16);
+  --thumb-bg:#dbe8f2;
   --code-bg:#0b1a26; --code-tx:#dce6ef; --code-ln:#7a89a3;
   --sea-1:#dbecf7; --sea-2:#e6f2f9; --sea-3:#eef5fa; --sea-4:#f4f9fc;
   --layer-ink:150,190,215;
@@ -210,7 +212,7 @@ html[data-theme="light"] .lay-5::after{background:radial-gradient(120% 80% at 50
 /* 一覧のカードは行内で高さを揃える（§1-4-5）。.gi は絞り込み用のラッパー */
 .gi{display:flex}
 .gi > .card{flex:1 1 auto}
-.thumb{position:relative;aspect-ratio:16/10;background:#081521;border-bottom:1px solid var(--line);overflow:hidden}
+.thumb{position:relative;aspect-ratio:16/10;background:var(--thumb-bg);border-bottom:1px solid var(--line);overflow:hidden}
 .thumb img{width:100%;height:100%;object-fit:cover}
 .thumb-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:100%;
   color:var(--tx-mut);background:repeating-linear-gradient(45deg,var(--bg-soft) 0 14px,color-mix(in srgb,var(--bg-soft) 82%,var(--tx) 5%) 14px 28px)}
@@ -293,8 +295,21 @@ html[data-theme="light"] a.chip:hover{filter:brightness(.96)}
   border:1px solid var(--line);border-radius:999px;padding:2px 9px}
 .proj-summary{margin:8px 0 0;font-size:13.5px;color:var(--tx-mut);max-width:70ch}
 .proj-more{margin:8px 0 0;font-size:13px}
+@media(max-width:700px){
+  /* 11個が縦積みになると作品まで遠いので、横スクロールの並びにする（.badge-shelf と同じ方式）*/
+  .proj-jump{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:12px}
+  .proj-jump a{flex:0 0 auto}
+  .proj-jump-h{flex:0 0 auto}
+}
 @media(max-width:560px){.proj-title{font-size:17px}}
 
+/* 発見スタンプ・実績は本題ではないので一覧の下に折りたたむ */
+.dex-fold{margin:40px 0 0;border-top:1px solid var(--line);padding-top:18px}
+.dex-fold > summary{cursor:pointer;font-size:13.5px;font-weight:800;color:var(--tx-mut);
+  padding:10px 0;display:flex;align-items:center}
+.dex-fold > summary:hover{color:var(--accent)}
+.dex-fold[open] > summary{color:var(--tx)}
+.dex-fold .dex-status{margin-top:10px}
 .dex-status{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;background:var(--bg-card);border:1px solid var(--line);
   border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
 .dex-count{margin:0;font-weight:900;font-size:15px;white-space:nowrap}
@@ -327,11 +342,11 @@ html.silhouette .game-card:not(.found) .card-summary{filter:blur(3px);user-selec
 .filters{display:flex;flex-direction:column;gap:10px;background:var(--bg-card);border:1px solid var(--line);
   border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;box-shadow:var(--shadow)}
 .filters-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.filters-more{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+/* 詳細な絞り込みは既定でたたむ（作品を早く見せるため）。ボタンで開く */
+.filters-more{display:none;flex-wrap:wrap;gap:10px;align-items:center}
+.filters-more.open{display:flex}
 .filters input[type=search]{flex:1 1 220px;min-width:160px}
 @media(max-width:899px){
-  .filters-more{display:none}
-  .filters-more.open{display:flex}
   .filters-more select,.filters-more .btn{flex:1 1 45%}
 }
 .filters input,.filters select{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--tx);

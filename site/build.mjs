@@ -490,14 +490,13 @@ function projectHead(a, n) {
   const groups = projectGroups();
   const content = `<div class="wrap page-pad">
 <h1 class="page-title">作品一覧</h1>
-<p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件を、<strong>実施したプロジェクトごと</strong>にまとめています。1つの作品が複数のプロジェクトに出ることがあります（第3回ゲームジャムの作品が OneButtonGames にも収録、など）。カードを選ぶと詳細ページへ移動します。一度開いた作品には「発見済み」のスタンプが付きます。</p>
-${status}
-${filters}
-<p class="kbd-hint"><kbd>/</kbd> で検索欄へ移動、<kbd>Esc</kbd> で解除できます。</p>
+<p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件を、<strong>実施したプロジェクトごと</strong>にまとめています。1つの作品が複数のプロジェクトに出ることがあります。</p>
 <nav class="proj-jump" aria-label="プロジェクトから探す">
   <span class="proj-jump-h">プロジェクトから探す</span>
   ${groups.map(({ act, list }) => `<a href="#proj-${act.id}">${esc(act.title)}<b>${list.length}</b></a>`).join('')}
 </nav>
+${filters}
+<p class="kbd-hint"><kbd>/</kbd> で検索欄へ移動、<kbd>Esc</kbd> で解除できます。</p>
 <h2 class="vh">プロジェクトごとの作品</h2>
 <div id="game-grid">
 ${groups.map(({ act, list }) => `<section class="proj" data-proj="${act.id}">
@@ -506,6 +505,10 @@ ${groups.map(({ act, list }) => `<section class="proj" data-proj="${act.id}">
 </section>`).join('')}
 </div>
 <p class="empty" id="empty" hidden>条件にあう作品が見つかりませんでした。</p>
+<details class="dex-fold">
+  <summary>発見スタンプ・実績（このブラウザだけの記録）</summary>
+  ${status}
+</details>
 </div>
 <script>window.__GAMES__=${json(idx)};</script>
 ${playableScript}`;
