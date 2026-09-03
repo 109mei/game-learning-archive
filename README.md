@@ -4,6 +4,7 @@
 ゲームジャム・ゲームコンテスト・ゲームプログラミング授業・高大連携・IDERIAの制作活動で生まれたゲームを、ブラウザで遊べる形（pygame-ce → pygbag → WebAssembly）で記録・公開します。
 
 ※ このサイトは **IDERIA公式ホームページではありません**。IDERIA公式サイトのURLが決まったら `site/src/data/site.json` の `ideriaOfficialUrl` に記入すると、フッターに自動でリンクが表示されます。
+同様に `portfolioUrl`（ポートフォリオサイト）も `site.json` で設定でき、**空欄のあいだはフッターに表示されません**。
 
 ## フォルダ構成
 
@@ -38,6 +39,13 @@ node build.mjs                 # dist/ に全ページを生成
 cd dist
 python -m http.server 8080     # または npx serve など
 # → http://localhost:8080 を開く
+```
+
+ビルド後は、リンク切れがないかを確認できます（Python標準ライブラリのみ）。
+
+```bash
+node site/build.mjs && python3 tools/linkcheck.py
+# サブパス公開の確認は: BASE_URL=/game-learning-archive node site/build.mjs && python3 tools/linkcheck.py --base /game-learning-archive
 ```
 
 公開するときは `dist/` をそのまま GitHub Pages / Netlify / Cloudflare Pages にアップロードします（無料枠で運用可能）。GitHub Actions を使う場合は「node site/build.mjs → site/dist を公開」の2ステップだけです。
@@ -77,6 +85,15 @@ git push -u origin main
 
 注意: 学生作品などの権利関係が未確認のため、**公開リポジトリにする前に `docs/TODO.md` の公開可否チェックを済ませ、それまでは Private リポジトリにしておくことを推奨**します。オープンソースライセンスは付与していません（作品の著作権は各制作者にあります）。
 
+## デザイン（テーマ「コードの深海に潜る」）
+
+見た目と遊び要素の仕様は **`docs/DESIGN_SPEC_V2.md` が「正」** です。デザインを変えたいときは、まず仕様書を書きかえてから実装します。
+
+- トップページは「潜行ルート」の層構造（海面 → あそぶ → よむ → しくみをしる → つくる → きろく）。画面端の**深度メーター**と**層ジャンプ**で行き来できます。深度の数値は演出で、実データではありません。
+- **ダークトーン基調**（深海）。ヘッダーの ◐ ボタンでライト（浅瀬）に切りかえられ、選択は localStorage に保存されます。
+- 遊び要素（**図鑑スタンプ・実績バッジ**）の記録は **localStorage のみ**。サーバーへは一切送信せず、保存が使えないブラウザではスタンプ表示を省くだけで他の機能は通常どおり動きます。
+- 泡や光の演出は自作のCSSアニメーションで、`prefers-reduced-motion` が有効な環境では停止します。
+
 ## 技術選定の理由
 
 要件（GitHub管理・ゲーム追加が簡単・静的公開・pygbag埋め込み・将来のDB移行・複雑にしない・無料公開）に対して React / Next.js / Astro / 自作ジェネレーターを比較しました。
@@ -109,6 +126,7 @@ pygame-ce 製ゲーム → **pygbag** で WebAssembly 化 → `public/play-files
 |---|---|
 | docs/SITE_PLAN.md | サイト情報設計 |
 | docs/SPECIFICATION.md | 機能仕様 |
+| docs/DESIGN_SPEC_V2.md | デザイン・遊び要素の仕様（見た目の「正」） |
 | docs/DATA_MODEL.md | データ構造の説明 |
 | docs/CONTENT_AUDIT.md | 元資料の監査記録 |
 | docs/GAME_INVENTORY.md | 見つかったゲーム一覧 |

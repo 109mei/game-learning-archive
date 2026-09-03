@@ -32,5 +32,11 @@
   "summary": "高校で実施した高大連携ゲームジャム。高校生10名が5作品を制作しました。",
   "description": "純真高等学校の生徒10名が参加し、ELECTRO BEAT・SwitchQuiz・チンチロバトルなど5作品を制作しました。素材から企画を考えるアプローチで実施した高大連携の取り組みです。 このゲームジャムの様子は、純真高等学校の公式サイト（eスポーツ部の活動）でも紹介されています。",
   "researchNote": "研究上の新回次では第2回（高校生）",
-  "verification": "実施日は推定"
+  "verification": "実施日は推定",
+  "relatedDocs": [
+    {
+      "title": "純真高等学校 公式サイト（eスポーツ部）の紹介記事",
+      "url": "https://junshin-hs.ed.jp/club/archives/19744"
+    }
+  ]
 }
