@@ -196,6 +196,23 @@ const MARK = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
   <circle cx="12" cy="12" r="6.5" fill="none" stroke="#4fd8c4" stroke-opacity=".6" stroke-width="1.4"/>
   <circle cx="12" cy="12" r="10" fill="none" stroke="#4fd8c4" stroke-opacity=".3" stroke-width="1.2"/>
 </svg>`;
+// 関連サイト（フッターの上・全ページ共通。site.json のURLが空欄のカードは出さない）
+const RELATED_SITES = [
+  { key: 'portfolioUrl', name: '永野斗遠 ポートフォリオ', desc: 'このアーカイブの制作者の業績・活動' },
+  { key: 'ideriaOfficialUrl', name: 'IDERIA公式サイト', desc: 'ゲームを生み出している制作団体' },
+].map(r => ({ ...r, url: site[r.key] })).filter(r => has(r.url));
+const shortUrl = u => String(u).replace(/^https?:\/\//, '').replace(/\/$/, '');
+const relatedHTML = RELATED_SITES.length ? `<section class="related" aria-labelledby="related-h">
+  <div class="wrap">
+    <h2 class="related-h" id="related-h">関連サイト</h2>
+    <div class="rel-grid">${RELATED_SITES.map(r => `<a class="rel-card" href="${esc(r.url)}" target="_blank" rel="noopener">
+      <span class="rel-name">${esc(r.name)} <span class="rel-ext" aria-hidden="true">↗</span></span>
+      <span class="rel-desc">${esc(r.desc)}</span>
+      <span class="rel-url">${esc(shortUrl(r.url))}<span class="vh">（外部サイト・新しいタブで開きます）</span></span>
+    </a>`).join('')}</div>
+  </div>
+</section>` : '';
+
 function hudHTML(cur, home) {
   const d = home ? { name: `${LAYERS[0].tag} ${LAYERS[0].name}`, from: 0, to: 0 } : depthFor(cur);
   const jump = home ? `
@@ -253,6 +270,7 @@ ${extraHead}
   </div>
 </header>
 <main id="main">${hudHTML(cur, home)}${content}</main>
+${relatedHTML}
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div>

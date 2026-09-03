@@ -434,6 +434,22 @@ pre.code.wrapped code{min-width:0}
 @keyframes bub{0%{opacity:.9;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-46px) scale(1.2)}}
 @media(min-width:900px){.surface-btn{right:84px}}
 
+/* ============ 関連サイト ============ */
+.related{border-top:1px solid var(--line);background:rgba(var(--layer-ink),.5);padding:34px 0 32px;margin-top:40px}
+html[data-theme="light"] .related{background:rgba(var(--layer-ink),.26)}
+.related-h{font-size:18px;font-weight:900;margin:0 0 16px;border-left:5px solid var(--accent);padding-left:12px;line-height:1.4}
+.rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.rel-card{display:flex;flex-direction:column;gap:6px;background:var(--bg-card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px 20px;color:var(--tx);box-shadow:var(--shadow);
+  transition:box-shadow .15s,transform .15s,border-color .15s}
+.rel-card:hover{text-decoration:none;box-shadow:var(--shadow-hover);transform:translateY(-2px);border-color:var(--accent)}
+.rel-name{font-weight:900;font-size:16px;color:var(--accent)}
+.rel-ext{font-size:12px}
+.rel-desc{font-size:13.5px;color:var(--tx)}
+.rel-url{font-size:12px;color:var(--tx-mut);word-break:break-all;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.related + .site-footer{margin-top:0;border-top:0}
+
 /* ============ フッター ============ */
 .site-footer{margin-top:40px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--bg-card) 92%,transparent);padding:38px 0 20px}
 .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:26px}
@@ -451,7 +467,7 @@ pre.code.wrapped code{min-width:0}
 /* ============ モーション配慮 ============ */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
-  .card:hover,.btn:hover,.year-card:hover,.learn-card:hover,.cat-card:hover,.level-card:hover{transform:none}
+  .card:hover,.btn:hover,.year-card:hover,.learn-card:hover,.cat-card:hover,.level-card:hover,.rel-card:hover{transform:none}
   .bubbles{display:none}
   body::after{animation:none}
 }
