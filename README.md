@@ -3,7 +3,7 @@
 「**ゲームを遊んで、コードを見て、ゲーム制作を学ぶ**」ためのアーカイブサイトです。
 ゲームジャム・ゲームコンテスト・ゲームプログラミング授業・高大連携・IDERIAの制作活動で生まれたゲームを、ブラウザで遊べる形（pygame-ce → pygbag → WebAssembly）で記録・公開します。
 
-※ このサイトは **IDERIA公式ホームページではありません**。IDERIA公式サイトのURLが決まったら `site/src/data/site.json` の `ideriaOfficialUrl` に記入すると、フッターに自動でリンクが表示されます。
+※ このサイトは **IDERIA公式ホームページではありません**。IDERIA公式サイト（`ideriaOfficialUrl`）とポートフォリオ（`portfolioUrl`）のURLは `site/src/data/site.json` で設定し、フッター上の「関連サイト」セクションとフッターの両方に自動でリンクが出ます（**空欄のあいだは表示されません**）。
 
 ## フォルダ構成
 
@@ -40,6 +40,13 @@ python -m http.server 8080     # または npx serve など
 # → http://localhost:8080 を開く
 ```
 
+ビルド後は、リンク切れがないかを確認できます（Python標準ライブラリのみ）。
+
+```bash
+node site/build.mjs && python3 tools/linkcheck.py
+# サブパス公開の確認は: BASE_URL=/game-learning-archive node site/build.mjs && python3 tools/linkcheck.py --base /game-learning-archive
+```
+
 公開するときは `dist/` をそのまま GitHub Pages / Netlify / Cloudflare Pages にアップロードします（無料枠で運用可能）。GitHub Actions を使う場合は「node site/build.mjs → site/dist を公開」の2ステップだけです。
 
 ## 作品の追加方法（データを足すだけ）
@@ -52,7 +59,7 @@ python -m http.server 8080     # または npx serve など
    - `web_versions/<id>/` にゲームのコピーを作り `main.py` にリネーム、メインループを `async` 化（`docs/WEB_COMPATIBILITY.md` の共通変換ポイント参照）。
    - `pip install pygbag` して `pygbag --build web_versions/<id>/main.py`
    - できた `build/web/` を `site/public/play-files/<id>/` にコピーし、gameのJSONで `play.playable: true, play.url: "/play-files/<id>/index.html"` にする。
-4. ソード公開する場合: `site/game-sources/<id>/` に **公開確認済みの** ソースを置き、JSONの `source` を設定（ファイル名・コード内に個人名が無いか必ず確認）。
+4. ソースコードを公開する場合: `site/game-sources/<id>/` に **公開確認済みの** ソースを置き、JSONの `source` を設定（ファイル名・コード内に個人名が無いか必ず確認）。
 5. `node build.mjs` を実行して確認 → コミット。
 
 活動・カテゴリ・年度も同様に、`activities/` へのJSON追加・`categories.json` への1行追加だけで一覧・詳細・年度ページへ自動反映されます（第5回・第6回ゲームジャム等はJSONを1つ足すだけ）。
@@ -76,6 +83,20 @@ git push -u origin main
 サブパス公開のためのURL調整は自動です（ワークフローが `BASE_URL` を設定してビルドします）。手元で同じ状態を確認したいときは `BASE_URL=/game-learning-archive node site/build.mjs`。
 
 注意: 学生作品などの権利関係が未確認のため、**公開リポジトリにする前に `docs/TODO.md` の公開可否チェックを済ませ、それまでは Private リポジトリにしておくことを推奨**します。オープンソースライセンスは付与していません（作品の著作権は各制作者にあります）。
+
+## デザイン（テーマ「コードの深海に潜る」）
+
+見た目と遊び要素の仕様は **`docs/DESIGN_SPEC_V2.md` が「正」** です。デザインを変えたいときは、まず仕様書を書きかえてから実装します。
+
+- トップページは「潜行ルート」の層構造（海面 → あそぶ → よむ → しくみをしる → つくる → きろく）。画面端の**深度メーター**と**層ジャンプ**で行き来できます。深度の数値は演出で、実データではありません。
+- **ダークトーン基調**（深海）。ヘッダーの ◐ ボタンでライト（浅瀬）に切りかえられ、選択は localStorage に保存されます。
+- 遊び要素（**図鑑スタンプ・実績バッジ**）の記録は **localStorage のみ**。サーバーへは一切送信せず、保存が使えないブラウザではスタンプ表示を省くだけで他の機能は通常どおり動きます。
+- 泡や光の演出は自作のCSSアニメーションで、`prefers-reduced-motion` が有効な環境では停止します。
+- フッターの上に「**関連サイト**」（ポートフォリオ・IDERIA公式サイト）のカードを全ページ共通で表示します。URLは `site.json` 由来で、空欄のカードは表示されません。
+- 図鑑では **絞り込み条件がURLに反映**され（`?q=&year=&sort=`）、リンク共有・再読み込みで復元できます。
+- **発見記録・実績は「発見記録・実績を消す」ボタン**（図鑑・About）でいつでも削除できます。未発見作品をシルエット表示にする任意設定もあります。
+- `site.json` の `siteUrl` を設定すると、**OGP画像（`/images/og-default.png`・作品ページはサムネイル）と `sitemap.xml` / `robots.txt`** を自動生成します（空欄なら出力しません）。
+- JavaScriptが無効な環境では、JSがないと動かないボタン・絞り込みUIを**そもそも表示しません**（一覧やコードの閲覧は可能）。
 
 ## 技術選定の理由
 
@@ -109,6 +130,7 @@ pygame-ce 製ゲーム → **pygbag** で WebAssembly 化 → `public/play-files
 |---|---|
 | docs/SITE_PLAN.md | サイト情報設計 |
 | docs/SPECIFICATION.md | 機能仕様 |
+| docs/DESIGN_SPEC_V2.md | デザイン・遊び要素の仕様（見た目の「正」。v2.2） |
 | docs/DATA_MODEL.md | データ構造の説明 |
 | docs/CONTENT_AUDIT.md | 元資料の監査記録 |
 | docs/GAME_INVENTORY.md | 見つかったゲーム一覧 |
