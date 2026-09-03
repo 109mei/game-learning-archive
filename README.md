@@ -59,7 +59,7 @@ node site/build.mjs && python3 tools/linkcheck.py
    - `web_versions/<id>/` にゲームのコピーを作り `main.py` にリネーム、メインループを `async` 化（`docs/WEB_COMPATIBILITY.md` の共通変換ポイント参照）。
    - `pip install pygbag` して `pygbag --build web_versions/<id>/main.py`
    - できた `build/web/` を `site/public/play-files/<id>/` にコピーし、gameのJSONで `play.playable: true, play.url: "/play-files/<id>/index.html"` にする。
-4. ソード公開する場合: `site/game-sources/<id>/` に **公開確認済みの** ソースを置き、JSONの `source` を設定（ファイル名・コード内に個人名が無いか必ず確認）。
+4. ソースコードを公開する場合: `site/game-sources/<id>/` に **公開確認済みの** ソースを置き、JSONの `source` を設定（ファイル名・コード内に個人名が無いか必ず確認）。
 5. `node build.mjs` を実行して確認 → コミット。
 
 活動・カテゴリ・年度も同様に、`activities/` へのJSON追加・`categories.json` への1行追加だけで一覧・詳細・年度ページへ自動反映されます（第5回・第6回ゲームジャム等はJSONを1つ足すだけ）。
@@ -93,6 +93,10 @@ git push -u origin main
 - 遊び要素（**図鑑スタンプ・実績バッジ**）の記録は **localStorage のみ**。サーバーへは一切送信せず、保存が使えないブラウザではスタンプ表示を省くだけで他の機能は通常どおり動きます。
 - 泡や光の演出は自作のCSSアニメーションで、`prefers-reduced-motion` が有効な環境では停止します。
 - フッターの上に「**関連サイト**」（ポートフォリオ・IDERIA公式サイト）のカードを全ページ共通で表示します。URLは `site.json` 由来で、空欄のカードは表示されません。
+- 図鑑では **絞り込み条件がURLに反映**され（`?q=&year=&sort=`）、リンク共有・再読み込みで復元できます。
+- **発見記録・実績は「発見記録・実績を消す」ボタン**（図鑑・About）でいつでも削除できます。未発見作品をシルエット表示にする任意設定もあります。
+- `site.json` の `siteUrl` を設定すると、**OGP画像（`/images/og-default.png`・作品ページはサムネイル）と `sitemap.xml` / `robots.txt`** を自動生成します（空欄なら出力しません）。
+- JavaScriptが無効な環境では、JSがないと動かないボタン・絞り込みUIを**そもそも表示しません**（一覧やコードの閲覧は可能）。
 
 ## 技術選定の理由
 
@@ -126,7 +130,7 @@ pygame-ce 製ゲーム → **pygbag** で WebAssembly 化 → `public/play-files
 |---|---|
 | docs/SITE_PLAN.md | サイト情報設計 |
 | docs/SPECIFICATION.md | 機能仕様 |
-| docs/DESIGN_SPEC_V2.md | デザイン・遊び要素の仕様（見た目の「正」） |
+| docs/DESIGN_SPEC_V2.md | デザイン・遊び要素の仕様（見た目の「正」。v2.2） |
 | docs/DATA_MODEL.md | データ構造の説明 |
 | docs/CONTENT_AUDIT.md | 元資料の監査記録 |
 | docs/GAME_INVENTORY.md | 見つかったゲーム一覧 |
