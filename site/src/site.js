@@ -1,7 +1,7 @@
 /* ============================================================
    共通クライアントスクリプト
-   テーマ切替 / メニュー / 深度メーター・層ジャンプ / 図鑑スタンプ・実績
-   / ランダム潜行 / 浮上ボタン / 図鑑の絞り込み・並び替え・URL反映
+   テーマ切替 / メニュー / メニュー / 作品一覧スタンプ・実績
+   / ランダム表示 / 上へ戻るボタン / 作品一覧の絞り込み・並び替え・URL反映
    / 記録リセット / シルエット表示 / 学習トピック検索 / コードビューア
    すべて localStorage 無効環境・JS無効環境でエラーを出さずに動作する。
    ============================================================ */
@@ -117,7 +117,7 @@
     if (found.length >= 10) unlock('find10');
   }
 
-  // ---------------------------------------------------------- 図鑑スタンプ（発見記録）
+  // ---------------------------------------------------------- 作品一覧スタンプ（発見記録）
   function paintStamps() {
     [].forEach.call(doc.querySelectorAll('[data-gid]'), function (el) {
       el.classList.toggle('found', store.ok && found.indexOf(el.dataset.gid) >= 0);
@@ -195,81 +195,7 @@
     navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
-  // ---------------------------------------------------------- 深度メーター・層ジャンプ
-  var hud = doc.getElementById('hud');
-  if (hud) {
-    var hudNum = doc.getElementById('hud-num');
-    var hudLayer = doc.getElementById('hud-layer');
-    var sections = [].slice.call(doc.querySelectorAll('.layer[data-depth]'));
-    var jumpLinks = [].slice.call(hud.querySelectorAll('.hud-jump a'));
-    var baseFrom = Number(hud.dataset.depthFrom || 0);
-    var baseTo = Number(hud.dataset.depthTo || 0);
-    var pageLayer = hud.dataset.layerName || '';
-    var ticking = false;
-
-    function topOf(el) {
-      return el.getBoundingClientRect().top + (window.pageYOffset || doc.documentElement.scrollTop);
-    }
-    function updateHud() {
-      ticking = false;
-      var y = window.pageYOffset || doc.documentElement.scrollTop || 0;
-      var vh = window.innerHeight || doc.documentElement.clientHeight;
-      var docH = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-      var prog = docH > vh ? Math.min(1, Math.max(0, y / (docH - vh))) : 1;
-      var depth = 0, name = pageLayer, active = -1;
-      if (sections.length) {
-        // 読み取り線は画面の42%付近。ページ先頭では 0m から始まるように立ち上げる
-        var pos = y + Math.min(y, vh * 0.42), idx = 0;
-        for (var i = 0; i < sections.length; i++) if (topOf(sections[i]) <= pos) idx = i;
-        var cur = sections[idx], next = sections[idx + 1];
-        var t0 = topOf(cur), t1 = next ? topOf(next) : docH;
-        var f = t1 > t0 ? Math.min(1, Math.max(0, (pos - t0) / (t1 - t0))) : 0;
-        var d0 = Number(cur.dataset.depth || 0);
-        var d1 = next ? Number(next.dataset.depth || 0) : d0;
-        depth = d0 + (d1 - d0) * f;
-        name = cur.dataset.layer || '';
-        active = idx;
-        if (idx === sections.length - 1 && f > 0.3) unlock('all-layers');
-      } else {
-        depth = baseFrom + (baseTo - baseFrom) * prog;
-      }
-      if (hudNum) hudNum.textContent = String(Math.round(depth));
-      if (hudLayer) hudLayer.textContent = name;
-      hud.style.setProperty('--p', String(prog));
-      for (var j = 0; j < jumpLinks.length; j++) jumpLinks[j].classList.toggle('on', j === active);
-    }
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(updateHud);
-        // rAF が来ない環境（描画が止まっているタブ等）でも表示が固まらないようにする保険
-        setTimeout(function () { if (ticking) updateHud(); }, 120);
-      } else {
-        setTimeout(updateHud, 32);
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    updateHud();
-
-    var jumpBtn = doc.getElementById('hud-jump-btn');
-    var jumpNav = doc.getElementById('hud-jump');
-    if (jumpBtn && jumpNav) {
-      jumpBtn.addEventListener('click', function () {
-        var open = jumpNav.classList.toggle('open');
-        jumpBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      jumpNav.addEventListener('click', function (e) {
-        if (e.target.closest && e.target.closest('a')) {
-          jumpNav.classList.remove('open');
-          jumpBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-  }
-
-  // ---------------------------------------------------------- 浮上ボタン
+  // ---------------------------------------------------------- 上へ戻るボタン
   var surf = doc.getElementById('surface-btn');
   if (surf) {
     var toggleSurf = function () {
@@ -329,7 +255,7 @@
     });
   });
 
-  // ---------------------------------------------------------- 図鑑（作品一覧）
+  // ---------------------------------------------------------- 作品一覧（作品一覧）
   var applyDex = null;
   var grid = doc.getElementById('game-grid');
   if (grid && window.__GAMES__) {
@@ -363,7 +289,7 @@
       var sp = new URLSearchParams();
       PARAMS.forEach(function (pair) {
         var el = pair[1];
-        // 既定値（図鑑No.順・すべて）はURLに載せず、共有URLを短く保つ
+        // 既定値（作品一覧No.順・すべて）はURLに載せず、共有URLを短く保つ
         if (el && el.value && !(pair[0] === 'sort' && el.value === 'no')) sp.set(pair[0], el.value);
       });
       if (fp && fp.checked) sp.set('play', '1');

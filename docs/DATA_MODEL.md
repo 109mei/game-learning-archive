@@ -117,7 +117,8 @@ site/src/content/learn/  # 学習コンテンツ（Markdown, 追加可能）
 
 ```jsonc
 {
-  "title": "ゲーム制作・プログラミング学習アーカイブ",
+  "title": "PLAYCE",
+  "subtitle": "ゲーム制作・プログラミング学習アーカイブ",
   "tagline": "ゲームを遊んで、コードを見て、ゲーム制作を学ぶ",
   "ideriaOfficialUrl": "",   // ★将来IDERIA公式サイトができたらURLを入れる（空なら非表示）
   "baseUrl": ""

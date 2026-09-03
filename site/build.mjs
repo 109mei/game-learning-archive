@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * ゲーム制作・プログラミング学習アーカイブ — 静的サイトジェネレーター
+ * PLAYCE（ゲーム制作・プログラミング学習アーカイブ） — 静的サイトジェネレーター
  * 依存パッケージなし（Node 18+ のみ）。 `node build.mjs` で dist/ に全ページを生成します。
  * データ（src/data/ のJSON、game-sources/、public/）を追加するだけでページが自動生成されます。
- * デザイン・遊び要素の「正」は docs/DESIGN_SPEC_V2.md（テーマ「コードの深海に潜る」）。
+ * デザイン・遊び要素の「正」は docs/DESIGN_SPEC_V2.md（サイト名 PLAYCE）。
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -57,7 +57,7 @@ const actById = Object.fromEntries(activities.map(a => [a.id, a]));
 const gameById = Object.fromEntries(games.map(g => [g.id, g]));
 const techName = t => techNames[t] || t;
 
-// 図鑑No.: データの並び順（ファイル名順）で自動採番
+// 作品No.: データの並び順（ファイル名順）で自動採番
 const ORIGIN = String(site.siteUrl || '').replace(/\/+$/, ''); // OGP/sitemap用（空欄なら出力しない）
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 const absUrl = p => ORIGIN ? ORIGIN + p : '';
@@ -157,42 +157,29 @@ function codeBlockHTML(code, lang) {
   return `<pre class="code"><code>${lines}</code></pre>`;
 }
 
-// ---------- 潜行ルート（トップの層） ----------
+// ---------- トップのセクション（§1: 深海の演出はやめ、普通の見出しにする） ----------
 const LAYERS = [
-  { id: 'surface', tag: '海面', name: 'ようこそ', depth: 0, flavor: '深呼吸をひとつ。ここから、コードの海へ潜っていく。' },
-  { id: 'layer-1', tag: '第1層', name: 'あそぶ', depth: 100, flavor: 'まずは触れてみよう。すべてのゲームはブラウザで動く。' },
-  { id: 'layer-2', tag: '第2層', name: 'よむ', depth: 300, flavor: '遊んだゲームの中身を、そのまま開いて読める。' },
-  { id: 'layer-3', tag: '第3層', name: 'しくみをしる', depth: 600, flavor: '動きのひとつひとつに名前がある。逆引きで仕組みを知る。' },
-  { id: 'layer-4', tag: '第4層', name: 'つくる', depth: 1000, flavor: '読むから作るへ。ブラウザで動かすところまでが一本道。' },
-  { id: 'layer-5', tag: '最深部', name: 'きろく', depth: 2000, flavor: 'ここまでの活動が、すべて記録として沈んでいる。' },
+  { id: 'surface', name: 'ようこそ',     flavor: 'ゲームジャム・授業・高大連携・IDERIAの活動で生まれた作品を、遊んで・読んで・学べます。' },
+  { id: 'layer-1', name: 'あそぶ',       flavor: 'まずは触れてみよう。すべてのゲームはブラウザで動く。' },
+  { id: 'layer-2', name: 'よむ',         flavor: '遊んだゲームの中身を、そのまま開いて読める。' },
+  { id: 'layer-3', name: 'しくみをしる', flavor: '動きのひとつひとつに名前がある。逆引きで仕組みを知る。' },
+  { id: 'layer-4', name: 'つくる',       flavor: '読むから作るへ。ブラウザで動かすところまでが一本道。' },
+  { id: 'layer-5', name: 'きろく',       flavor: 'ここまでの活動を、すべて記録として残しています。' },
 ];
 // 実績バッジ（表示・トーストの文言はここが唯一の定義。site.js は window.__BADGES__ を読む）
 const BADGES = [
-  { id: 'first-dive', icon: '🌊', name: 'はじめての潜行', desc: 'このアーカイブを訪れた' },
+  { id: 'first-dive', icon: '🌊', name: 'はじめての訪問', desc: 'このサイトを訪れた' },
   { id: 'first-find', icon: '🔎', name: 'はじめての発見', desc: '作品ページを1つ開いた' },
-  { id: 'find5', icon: '🐟', name: '5作品発見', desc: '5作品を図鑑に記録した' },
-  { id: 'find10', icon: '🐙', name: '10作品発見', desc: '10作品を図鑑に記録した' },
+  { id: 'find5', icon: '🐟', name: '5作品発見', desc: '5作品を見た' },
+  { id: 'find10', icon: '🐙', name: '10作品発見', desc: '10作品を見た' },
   { id: 'read-code', icon: '⌨', name: 'コードを読んだ', desc: 'ソースコードのページを開いた' },
-  { id: 'all-layers', icon: '🧭', name: '全層到達', desc: 'トップページの最深部までたどり着いた' },
+  { id: 'all-layers', icon: '🧭', name: '最後まで到達', desc: 'トップページの最後までたどり着いた' },
 ];
-// ページごとの深度（演出。実データではない）
-const PAGE_DEPTHS = [
-  ['/games/', '第1層 図鑑', 100, 300],
-  ['/play/', '第1層 あそぶ', 100, 300],
-  ['/source-list/', '第2層 よむ', 300, 600],
-  ['/learn/', '第3層 しくみをしる', 600, 1000],
-  ['/about/', '第4層 つくる', 1000, 1400],
-  ['/404', '座標をロスト', 0, 0],
-];
-function depthFor(cur) {
-  for (const [p, name, from, to] of PAGE_DEPTHS) if (cur.startsWith(p)) return { name, from, to };
-  return { name: '最深部 きろく', from: 2000, to: 2300 };
-}
 
 // ---------- layout ----------
 const NAV = [
   ['/play/', 'あそぶ'],
-  ['/games/', '図鑑'],
+  ['/games/', '作品'],
   ['/activities/', '活動'],
   ['/learn/', '学ぶ'],
   ['/about/', 'About'],
@@ -219,20 +206,6 @@ const relatedHTML = RELATED_SITES.length ? `<section class="related" aria-labell
   </div>
 </section>` : '';
 
-function hudHTML(cur, home) {
-  const d = home ? { name: `${LAYERS[0].tag} ${LAYERS[0].name}`, from: 0, to: 0 } : depthFor(cur);
-  const jump = home ? `
-    <button type="button" class="hud-jump-btn js-only" id="hud-jump-btn" hidden aria-expanded="false" aria-controls="hud-jump" aria-label="層ジャンプを開く">層</button>
-    <nav class="hud-jump" id="hud-jump" aria-label="層ジャンプ">
-      ${LAYERS.map(l => `<a href="#${l.id}"><span>${esc(l.tag)} ${esc(l.name)}</span><em>${l.depth}m</em></a>`).join('')}
-    </nav>` : '';
-  return `<div class="hud" id="hud" data-depth-from="${d.from}" data-depth-to="${d.to}" data-layer-name="${esc(d.name)}"
-    title="スクロール位置を「深度」として表示しています（演出です。詳しくはAboutの「サイトの構成」）">
-    <p class="hud-read" aria-hidden="true"><span class="hud-num" id="hud-num">0</span><span class="hud-unit">m</span></p>
-    <em class="hud-layer" id="hud-layer" aria-hidden="true">${esc(d.name)}</em>
-    <div class="hud-bar" aria-hidden="true"><i class="hud-fill"></i></div>${jump}
-  </div>`;
-}
 function page({ title, desc, path: cur = '/', content, extraHead = '', bodyClass = '', discover = '', readCode = false, home = false, url = '', image = '' }) {
   const fullTitle = title ? `${title} | ${site.title}` : `${site.title} — ${site.tagline}`;
   const ogImage = ORIGIN ? absUrl(image || '/images/og-default.png') : '';
@@ -274,15 +247,15 @@ ${extraHead}
 <a class="vh" href="#main">本文へスキップ</a>
 <header class="site-header">
   <div class="wrap header-in">
-    <a class="brand" href="/"><span class="brand-mark">${MARK}</span> <span class="brand-text"><span class="brand-full">${esc(site.title)}</span><span class="brand-short">学習アーカイブ</span></span></a>
+    <a class="brand" href="/"><span class="brand-mark">${MARK}</span> <span class="brand-text"><span class="brand-name">${esc(site.title)}</span><span class="brand-sub">${esc(site.subtitle || '')}</span></span></a>
     <button type="button" id="nav-toggle" class="nav-toggle js-only" hidden aria-expanded="false" aria-controls="site-nav">メニュー</button>
     <nav class="nav" id="site-nav" aria-label="メインメニュー">
       ${NAV.map(([href, label]) => `<a href="${href}"${cur.startsWith(href) ? ' class="on" aria-current="page"' : ''}>${label}</a>`).join('')}
     </nav>
-    <button type="button" id="theme-toggle" class="theme-toggle js-only" hidden aria-label="配色（深海／浅瀬）を切りかえ" title="配色（深海／浅瀬）を切りかえ">◐</button>
+    <button type="button" id="theme-toggle" class="theme-toggle js-only" hidden aria-label="配色を切りかえ" title="配色を切りかえ">◐</button>
   </div>
 </header>
-<main id="main" tabindex="-1">${hudHTML(cur, home)}${content}</main>
+<main id="main" tabindex="-1">${content}</main>
 ${relatedHTML}
 <footer class="site-footer">
   <div class="wrap foot-grid">
@@ -292,7 +265,7 @@ ${relatedHTML}
       ${extLinks.length ? `<p class="foot-links">${extLinks.map(([u, l]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${l} ↗</a>`).join('')}</p>` : ''}
     </div>
     <nav aria-label="フッターメニュー"><p class="foot-h">見る・遊ぶ</p>
-      <a href="/play/">ゲームを遊ぶ</a><a href="/games/">図鑑（作品一覧）</a><a href="/source-list/">ソースコード</a><a href="/years/">年度別アーカイブ</a>
+      <a href="/play/">ゲームを遊ぶ</a><a href="/games/">作品一覧</a><a href="/source-list/">ソースコード</a><a href="/years/">年度別アーカイブ</a>
     </nav>
     <nav aria-label="活動"><p class="foot-h">活動</p>
       <a href="/game-jams/">ゲームジャム</a><a href="/contests/">コンテスト</a><a href="/classes/">授業</a><a href="/collabs/">高大連携</a><a href="/ideria/">IDERIA制作</a>
@@ -301,11 +274,10 @@ ${relatedHTML}
       <a href="/learn/">学習トピック一覧</a><a href="/about/">このサイトについて</a>
     </nav>
   </div>
-  <p class="foot-copy">最終更新（ビルド）: ${BUILD_DATE} ／ © ${new Date().getFullYear()} ゲーム制作・プログラミング学習アーカイブ</p>
+  <p class="foot-copy">最終更新（ビルド）: ${BUILD_DATE} ／ © ${new Date().getFullYear()} ${esc(site.title)}</p>
 </footer>
-<button class="surface-btn js-only" id="surface-btn" type="button" hidden aria-label="ページの最上部へ浮上する">
-  <span class="bub" aria-hidden="true"></span><span class="bub" aria-hidden="true"></span><span class="bub" aria-hidden="true"></span>
-  <span class="up" aria-hidden="true">↑</span>浮上する</button>
+<button class="surface-btn js-only" id="surface-btn" type="button" hidden aria-label="ページの最上部へ戻る">
+  <span class="up" aria-hidden="true">↑</span>上へ戻る</button>
 <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
 <script src="/assets/site.js" defer></script>
 </body>
@@ -319,7 +291,7 @@ function gameCard(g) {
   const orgNames = (g.organizations || []).map(id => orgById[id]?.name).filter(Boolean);
   const thumb = g.thumbnail
     ? `<img src="${g.thumbnail}" alt="${esc(g.title)}のプレイ画面" loading="lazy" width="640" height="400">`
-    : `<div class="thumb-ph" role="img" aria-label="画像準備中"><span>🎮</span><small>画像準備中</small></div>`;
+    : `<div class="thumb-ph" role="img" aria-label="${esc(g.title)}（画像準備中）"><span class="ph-title">${esc(g.title)}</span><small>画像準備中</small></div>`;
   return `<a class="card game-card" href="/games/${g.id}/" data-gid="${g.id}">
   <span class="dex-no">No.${dex(g.id)}</span><span class="stamp">発見済み</span>
   <div class="thumb">${thumb}${g.play?.playable ? badgePlay : ''}</div>
@@ -329,7 +301,6 @@ function gameCard(g) {
     <p class="card-meta">
       ${has(g.genre) ? `<span class="chip chip-genre">${esc(g.genre)}</span>` : ''}
       ${g.year != null ? `<span class="chip chip-year">${g.year}年度</span>` : ''}
-      ${(g.tech || []).slice(0, 2).map(t => `<span class="chip chip-tech">${esc(techName(t))}</span>`).join('')}
     </p>
     ${orgNames.length || acts.length ? `<p class="card-org">${esc([orgNames[0], acts[0]?.title].filter(Boolean).join(' ／ '))}</p>` : ''}
   </div></a>`;
@@ -349,40 +320,26 @@ const section = (title, more, inner) =>
   `<section class="sec"><div class="wrap"><div class="sec-head"><h2>${title}</h2>${more ? `<a class="more" href="${more}">すべて見る →</a>` : ''}</div>${inner}</div></section>`;
 const cardGrid = items => `<div class="grid">${items.join('')}</div>`;
 function defRow(label, value) { return has(value) ? `<div class="def-row"><dt>${label}</dt><dd>${value}</dd></div>` : ''; }
-// 層のヘッダー（深度表示つき）
+// セクションの見出し
 function layerHead(l) {
   return `<div class="layer-head">
-    <p class="layer-depth"><span class="layer-no">${esc(l.tag)}</span><span class="layer-m">${l.depth}m</span></p>
-    <h2>${esc(l.name)}</h2>
+    <h2 class="layer-title" id="${l.id}-h">${esc(l.name)}</h2>
     <p class="layer-flavor">${esc(l.flavor)}</p>
   </div>`;
 }
 function layer(l, i, inner) {
-  return `<section class="layer lay-${i}" id="${l.id}" data-depth="${l.depth}" data-layer="${esc(l.tag)} ${esc(l.name)}">
-  ${bubblesHTML(i, 520)}<span class="layer-watermark" aria-hidden="true">${l.depth}</span>
+  return `<section class="layer lay-${i}" id="${l.id}" aria-labelledby="${l.id}-h">
   <div class="wrap">${layerHead(l)}${inner}</div></section>`;
 }
-const randomBtn = (cls = 'btn') => `<button type="button" class="${cls} js-only" hidden data-random-dive>🎲 ランダムに1本潜る</button>`;
+const randomBtn = (cls = 'btn') => `<button type="button" class="${cls} js-only" hidden data-random-dive>🎲 ランダムに1本</button>`;
 // 泡（座標は固定値。prefers-reduced-motion では CSS 側で非表示）
-const BUBBLE_SETS = [
-  [[6, 14, 17, 0], [15, 9, 21, 1.6], [26, 18, 19, 3.1], [38, 11, 23, .8], [47, 22, 18, 2.4], [58, 13, 20, 4.2],
-  [67, 17, 22, 1.2], [76, 10, 19, 3.6], [86, 20, 17, 2], [93, 12, 21, 4.8], [33, 8, 24, 5.4], [52, 16, 18, 6.1]],
-  [[11, 12, 22, .4], [29, 8, 26, 2.2], [44, 15, 20, 4.1], [62, 10, 24, 1.4], [79, 13, 21, 3.3], [91, 9, 27, 5.2]],
-  [[18, 10, 25, 1.1], [41, 13, 22, 3.4], [58, 8, 28, .6], [72, 11, 24, 4.5], [88, 9, 26, 2.7]],
-  [[23, 9, 28, 2.1], [49, 12, 25, .9], [67, 8, 30, 3.8], [84, 10, 27, 5.5]],
-  [[31, 8, 30, 1.7], [55, 10, 27, 4.2], [77, 7, 32, 2.9]],
-  [[37, 7, 34, 2.5], [64, 9, 30, 5.1]],
-];
-const bubblesHTML = (i, rise) => `<div class="bubbles" aria-hidden="true" style="--rise:${rise}px">${(BUBBLE_SETS[i] || [])
-  .map(([x, s, d, dl]) => `<i style="--x:${x}%;--s:${s}px;--d:${d}s;--delay:${dl}s"></i>`).join('')}</div>`;
 const playableScript = `<script>window.__PLAYABLE__=${json(playableGames.map(g => g.id))};</script>`;
 
-// ---------- HOME（潜行ルート） ----------
+// ---------- HOME ----------
 {
   const [L0, L1, L2, L3, L4, L5] = LAYERS;
-  const bubbles = bubblesHTML(0, 620);
 
-  // 第1層: 遊べる作品のハイライト
+  // あそぶ: 遊べる作品のハイライト
   const pickIds = ['ideria-chokopaki', 'gj4-hill-rush', 'gj3-music-game', 'obg-order-recall'];
   const picked = pickIds.map(id => gameById[id]).filter(g => g && g.play?.playable);
   const featured = [...picked, ...playableGames.filter(g => g.thumbnail && !pickIds.includes(g.id))].slice(0, 6);
@@ -419,18 +376,18 @@ const playableScript = `<script>window.__PLAYABLE__=${json(playableGames.map(g =
   }).join('');
 
   const content = `
-<section class="layer surface" id="${L0.id}" data-depth="${L0.depth}" data-layer="${esc(L0.tag)} ${esc(L0.name)}">
-  ${bubbles}<span class="layer-watermark" aria-hidden="true">${L0.depth}</span>
-  <div class="wrap">
-    <p class="hero-eyebrow">DIVE INTO THE CODE — 深度 0m</p>
-    <h1>ゲームを遊んで、<br class="sp">コードを見て、<br>ゲーム制作を学ぶ。</h1>
-    <p class="hero-lead">ここは、ゲームジャム・授業・高大連携・IDERIAの活動で生まれたゲームのアーカイブ。<br class="pc">下へ潜るほど、<b>あそぶ → よむ → しくみをしる → つくる</b> と深くなります。</p>
-    <p class="hero-cta"><a class="btn btn-primary btn-lg" href="#${L1.id}">▼ 潜行開始</a>${randomBtn('btn btn-lg')}<a class="btn btn-lg" href="/games/">図鑑をひらく</a></p>
+<section class="layer surface" id="${L0.id}">
+  <div class="wrap hero-in">
+    <p class="hero-eyebrow">PLAY + PLACE</p>
+    <h1 class="hero-title">${esc(site.tagline)}。</h1>
+    <p class="hero-lead">ここは、ゲームジャム・授業・高大連携・IDERIAの活動で生まれたゲームの置き場所。<br>
+    <strong>あそぶ → よむ → しくみをしる → つくる</strong> の順に並べています。</p>
+    <p class="hero-cta"><a class="btn btn-primary btn-lg" href="#${L1.id}">作品を見る</a>${randomBtn('btn btn-lg')}<a class="btn btn-lg" href="/games/">作品一覧</a></p>
     <p class="hero-stats"><span><b>${games.length}</b> 作品</span><span><b>${playableGames.length}</b> ブラウザ対応</span><span><b>${sourceGames.length}</b> ソース公開</span><span><b>${activities.length}</b> 活動</span><span><b>${learnTopics.length}</b> 学習トピック</span></p>
   </div>
 </section>
 ${layer(L1, 1, `${cardGrid(featured.map(gameCard))}
-  <p class="layer-actions"><a class="btn btn-primary" href="/play/">▶ 遊べる作品をすべて見る</a><a class="btn" href="/games/">図鑑をひらく</a>${randomBtn()}</p>`)}
+  <p class="layer-actions"><a class="btn btn-primary" href="/play/">▶ 遊べる作品をすべて見る</a><a class="btn" href="/games/">作品一覧</a>${randomBtn()}</p>`)}
 ${layer(L2, 2, `<div class="peek-grid">${peek}
   <ul class="peek-facts">
     <li><b>${sourceGames.length}</b> 作品のソースコードを公開</li>
@@ -441,7 +398,7 @@ ${layer(L2, 2, `<div class="peek-grid">${peek}
 ${layer(L3, 3, `<div class="level-grid">${levelCards}</div>
   <p class="layer-actions"><a class="btn btn-primary" href="/learn/">学習トピック ${learnTopics.length} 本を見る</a></p>`)}
 ${layer(L4, 4, `<ol class="route">
-    <li><h3>遊んで決める</h3><p>図鑑から気になる作品を選んで、ブラウザでそのまま遊ぶ。作りたいものの手ざわりを知る。</p></li>
+    <li><h3>遊んで決める</h3><p>作品一覧から気になる作品を選んで、ブラウザでそのまま遊ぶ。作りたいものの手ざわりを知る。</p></li>
     <li><h3>コードを読む</h3><p>同じ作品のソースコードを開いて、動きがどう書かれているかを確かめる。</p></li>
     <li><h3>逆引きで作る</h3><p>「学ぶ」の逆引きコードをコピーして動かし、数値や画像を変えながら自分のゲームにする。</p></li>
     <li><h3>Web版にする</h3><p>pygame-ce で作った作品は pygbag でWebAssemblyに変換すれば、ブラウザで遊べる形で公開できる。</p></li>
@@ -454,7 +411,7 @@ ${playableScript}`;
   out('index.html', page({ content, path: '/', home: true }));
 }
 
-// ---------- 図鑑（作品一覧） /games/ ----------
+// ---------- 作品一覧 /games/ ----------
 {
   const ord = Object.fromEntries(sortYearDesc(games).map((g, i) => [g.id, i]));
   // 検索対象を拡張（制作元・関連活動・使用技術・活動種別も引っかかるようにする）
@@ -487,7 +444,7 @@ ${playableScript}`;
 <div class="filters" id="filters">
   <div class="filters-row">
     <input type="search" id="q" placeholder="タイトル・活動・技術などで検索" aria-label="作品を検索">
-    <select id="f-sort" aria-label="並び替え"><option value="no">並び: 図鑑No.順</option><option value="name">並び: 名前順（辞書順）</option><option value="act">並び: 活動・年度順</option></select>
+    <select id="f-sort" aria-label="並び替え"><option value="no">並び: 作品No.順</option><option value="name">並び: 名前順（辞書順）</option><option value="act">並び: 活動・年度順</option></select>
     <button type="button" class="btn btn-sm js-only" hidden id="filter-toggle" aria-expanded="false" aria-controls="filters-more">絞り込み ▾</button>
     ${randomBtn('btn btn-sm')}
   </div>
@@ -504,7 +461,7 @@ ${playableScript}`;
 </div>
 <p class="result-count" id="count" role="status">${games.length} / ${games.length} 作品を表示中</p>`;
   const content = `<div class="wrap page-pad">
-<h1 class="page-title">図鑑（作品一覧）</h1>
+<h1 class="page-title">作品一覧</h1>
 <p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件のアーカイブです。カードを選ぶと詳細ページへ移動します。一度開いた作品には「発見済み」のスタンプが付きます。</p>
 ${status}
 ${filters}
@@ -515,7 +472,7 @@ ${filters}
 </div>
 <script>window.__GAMES__=${json(idx)};</script>
 ${playableScript}`;
-  out('games/index.html', page({ title: '図鑑（作品一覧）', path: '/games/', content }));
+  out('games/index.html', page({ title: '作品一覧', path: '/games/', content }));
 }
 
 // ---------- 作品詳細 ----------
@@ -535,10 +492,10 @@ for (const g of games) {
     `<button type="button" class="btn js-only" hidden data-copy-url>🔗 URLをコピー</button>`,
   ].filter(Boolean).join('');
   const content = `<div class="wrap page-pad">
-<nav class="crumbs" aria-label="パンくず"><a href="/">HOME</a> › <a href="/games/">図鑑</a> › <span>${esc(g.title)}</span></nav>
+<nav class="crumbs" aria-label="パンくず"><a href="/">HOME</a> › <a href="/games/">作品一覧</a> › <span>${esc(g.title)}</span></nav>
 <div class="detail-grid">
   <div class="detail-media">${main}
-    <p class="badge-line"><span class="chip chip-tech">図鑑No.${dex(g.id)}</span>${g.play?.playable ? badgePlay : ''}<span class="found-mark" id="found-mark">発見済み</span></p>
+    <p class="badge-line"><span class="chip chip-tech">作品No.${dex(g.id)}</span>${g.play?.playable ? badgePlay : ''}<span class="found-mark" id="found-mark">発見済み</span></p>
     ${shots.length ? `<div class="shot-row">${shots.map(u => `<img src="${u}" alt="${esc(g.title)}のスクリーンショット" loading="lazy">`).join('')}</div>` : ''}
   </div>
   <div class="detail-info">
@@ -562,7 +519,7 @@ ${has(g.background) ? `<section class="detail-sec"><h2>制作背景</h2><p>${esc
 ${has(g.highlights) ? `<section class="detail-sec"><h2>工夫した点</h2><p>${esc(g.highlights)}</p></section>` : ''}
 ${topics.length ? `<section class="detail-sec"><h2>このゲームで使われている技術を学ぶ</h2><p class="chips">${topics.map(t => `<a class="chip chip-learn" href="/learn/${t.slug}/">${esc(t.title)}</a>`).join(' ')}</p></section>` : ''}
 ${has(g.webVersionNote) ? `<section class="detail-sec"><h2>Web版について</h2><p>${esc(g.webVersionNote)}</p></section>` : ''}
-<nav class="pager" aria-label="図鑑No.順の移動">
+<nav class="pager" aria-label="作品No.順の移動">
   ${prevG ? `<a class="pg-prev" href="/games/${prevG.id}/"><small>← No.${dex(prevG.id)} 前の作品</small><b>${esc(prevG.title)}</b></a>` : ''}
   ${nextG ? `<a class="pg-next" href="/games/${nextG.id}/"><small>No.${dex(nextG.id)} 次の作品 →</small><b>${esc(nextG.title)}</b></a>` : ''}
 </nav>
@@ -587,7 +544,7 @@ ${playableScript}`;
 }
 for (const g of playableGames) {
   const content = `<div class="wrap page-pad play-page">
-<nav class="crumbs" aria-label="パンくず"><a href="/">HOME</a> › <a href="/games/">図鑑</a> › <a href="/games/${g.id}/">${esc(g.title)}</a> › <span>プレイ</span></nav>
+<nav class="crumbs" aria-label="パンくず"><a href="/">HOME</a> › <a href="/games/">作品一覧</a> › <a href="/games/${g.id}/">${esc(g.title)}</a> › <span>プレイ</span></nav>
 <h1 class="page-title">${esc(g.title)} をプレイ</h1>
 <div class="play-frame-wrap">
   <iframe id="game-frame" src="${g.play.url}" title="${esc(g.title)}（ゲーム画面）" allow="autoplay; fullscreen" allowfullscreen loading="eager"></iframe>
@@ -782,11 +739,10 @@ ${rel.length ? `<section class="detail-sec"><h2>この技術を使っている�
 <p>「${esc(site.title)}」は、ゲームジャム・ゲームコンテスト・ゲームプログラミング授業・高大連携・IDERIAの制作活動などで生まれたゲーム作品を記録し、<b>遊んで・コードを読んで・学べる</b>かたちで公開しているアーカイブサイトです。</p>
 <h2>できること</h2>
 <p>pygame-ceで作られた作品はpygbagでWebAssemblyに変換し、ブラウザからそのまま遊べます。多くの作品はソースコードも公開しており、「学ぶ」ページでは実際のゲームジャムで配布された逆引きサンプルコードで学習できます。</p>
-<h2 id="route">サイトの構成（潜行ルート）</h2>
-<p>トップページは「コードの深海に潜る」をテーマに、<a href="/play/">あそぶ（第1層）</a>→<a href="/source-list/">よむ（第2層）</a>→<a href="/learn/">しくみをしる（第3層）</a>→つくる（第4層）→<a href="/activities/">きろく（最深部）</a>の順に深くなる層構造になっています。画面の深度メーターと層ジャンプで行き来できます。深度の数字は演出で、実際のデータではありません。</p>
-<h2 id="record">図鑑スタンプ・実績について</h2>
-<p>開いた作品には「発見済み」のスタンプが付き、<a href="/games/">図鑑ページ</a>で発見数と実績バッジを確認できます。これらの記録は<b>お使いのブラウザ（localStorage）にのみ保存され、サーバーへ送信されることはありません</b>。ブラウザの設定で保存が使えない場合は、スタンプ表示を行わないだけで、ほかの機能は通常どおり動作します。</p>
-<p>深度メーターの数字は潜行の演出で、実際のデータではありません。</p>
+<h2 id="route">サイトの構成</h2>
+<p>トップページは <strong>あそぶ → よむ → しくみをしる → つくる → きろく</strong> の順に並べています。目的のページには上のメニューからも移動できます。</p>
+<h2 id="record">発見スタンプ・実績について</h2>
+<p>開いた作品には「発見済み」のスタンプが付き、<a href="/games/">作品一覧ページ</a>で発見数と実績バッジを確認できます。これらの記録は<b>お使いのブラウザ（localStorage）にのみ保存され、サーバーへ送信されることはありません</b>。ブラウザの設定で保存が使えない場合は、スタンプ表示を行わないだけで、ほかの機能は通常どおり動作します。</p>
 <ul class="badge-shelf">${BADGES.map(b =>
   `<li class="badge-item" data-badge="${b.id}" title="${esc(b.desc)}"><i>${b.icon}</i>${esc(b.name)}</li>`).join('')}</ul>
 <p class="js-only" data-store-only hidden><button type="button" class="btn btn-sm" id="reset-record">発見記録・実績を消す</button></p>
@@ -801,7 +757,7 @@ ${rel.length ? `<section class="detail-sec"><h2>この技術を使っている�
 }
 out('404.html', page({
   title: 'ページが見つかりません', path: '/404', url: '/404.html',
-  content: `<div class="wrap page-pad" style="text-align:center"><h1 class="page-title">404</h1><p class="page-lead">お探しのページが見つかりませんでした。潮に流されたようです。</p><p class="detail-actions" style="justify-content:center"><a class="btn btn-primary" href="/">HOMEへ浮上する</a><a class="btn" href="/games/">図鑑をひらく</a></p></div>`,
+  content: `<div class="wrap page-pad" style="text-align:center"><h1 class="page-title">404</h1><p class="page-lead">お探しのページが見つかりませんでした。</p><p class="detail-actions" style="justify-content:center"><a class="btn btn-primary" href="/">HOMEへ戻る</a><a class="btn" href="/games/">作品一覧</a></p></div>`,
 }));
 
 // ---------- static assets ----------
