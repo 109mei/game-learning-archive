@@ -82,6 +82,22 @@ git push -u origin main
 
 サブパス公開のためのURL調整は自動です（ワークフローが `BASE_URL` を設定してビルドします）。手元で同じ状態を確認したいときは `BASE_URL=/game-learning-archive node site/build.mjs`。
 
+### 公開URLと、うまく表示されないときの確認
+
+公開先は **`https://<ユーザー名>.github.io/game-learning-archive/`**（プロジェクトサイト）です。画像や各ページのURLにも必ず **`/game-learning-archive/` が付きます**。
+
+```
+○ https://109mei.github.io/game-learning-archive/images/games/ideria-chokopaki.png
+○ https://109mei.github.io/game-learning-archive/games/ideria-chokopaki/
+× https://109mei.github.io/images/games/ideria-chokopaki.png   ← 別サイト（ユーザーサイト）を指すため404
+```
+
+外部サイトからこのアーカイブの画像やページへリンクするときは、この接頭辞を落とさないでください。
+
+**READMEがそのまま表示される / 全ページが404になるとき**は、Pagesの公開元がActionsになっていない可能性があります。リポジトリの **Settings → Pages → Build and deployment → Source** を **GitHub Actions** にしてください（`.github/workflows/deploy.yml` は用意済み。設定後は Actions タブから「Deploy to GitHub Pages」を再実行）。
+
+正しく公開できているかは、Actionsの `deploy` ジョブのログで確認できます。`Created deployment for <コミットSHA>` → `Reported success!` → `Evaluated environment url: https://.../game-learning-archive/` が出ていれば、その内容が配信されています（ブランチ公開のままだとこのジョブはエラーで止まります）。反映直後は数分キャッシュが残ることがあるため、スーパーリロード（Ctrl/Cmd+Shift+R）で確認してください。
+
 注意: 学生作品などの権利関係が未確認のため、**公開リポジトリにする前に `docs/TODO.md` の公開可否チェックを済ませ、それまでは Private リポジトリにしておくことを推奨**します。オープンソースライセンスは付与していません（作品の著作権は各制作者にあります）。
 
 ## デザイン（テーマ「コードの深海に潜る」）
