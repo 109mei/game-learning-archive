@@ -15,7 +15,7 @@
 
 ## データの「要確認」項目（判明したら games/activities のJSONを更新）
 
-- [ ] 十人十色ゲームコンテストの正式開催日（2024年の何月か）・「Scratchのプロジェクト」の正式作品名・参加者Cの作品の代表名（SAM / Boosted platform / Amunta / Einar build）
+- [ ] 十人十色ゲームコンテストの正式開催日（2024年の何月か）・「Scratchのプロジェクト」の正式作品名・参加者Cの作品の代表名（SAM / Boosted platform / Amunta のどれを代表とするか）
 - [ ] dodge the bullet の所属（予備実験か第1回か）／2Dgameジャンムー の所属（予備実験か第2回か）
 - [ ] flappy plane の位置づけ（第2回作品としてマスターに記載あり・フォルダ実在）
 - [ ] 第3回の正確な実施日（2025-11-05・11-12 は推定）

@@ -14,6 +14,7 @@
 | 2026-09-04 | v2.3 | `docs/PRIVACY_CHECK.md` の保留画像（オセロ試作写真・コンテストチラシ・マニュアル表紙）を実査し、結果を同§3.7に記録。チラシはQRがGoogleフォームに解決するため、マニュアル表紙は帰属する活動が未確定のため、いずれも `contest-2024` には登録していない（サイトの表示に変更なし） |
 | 2026-09-04 | v2.4 | 公開 docs/ の学生個人情報を伏せ字化（下の名前→参加者A〜C、学籍番号→22XXXXX、姓→〈姓〉）。対象: GAME_INVENTORY・PRIVACY_CHECK・TODO。注意点の意味は保持。あわせて公開中の作品名「Einar build」に名前が残っている件を PRIVACY_CHECK §2 に未対応として記録 |
 | 2026-09-04 | v2.5 | OneButtonGames ランチャーのサムネイル `obg-launcher.png` を追加（従来は個別作品 ORDER RECALL の画像が代用されていた）。`build.mjs` の `public/images/games/<id>.png` 自動検出で紐づく |
+| 2026-09-04 | v2.6 | 参加者名を含む作品名を改称。「Einar build（SAM / Boosted platform）」→「SAM / Boosted platform」、ID  → （URLは ）。旧URLは失効。PRIVACY_CHECK §2 の該当行を対応済みに更新 |
 
 ## 1. デザインコンセプト —「コードの深海に潜る」
 

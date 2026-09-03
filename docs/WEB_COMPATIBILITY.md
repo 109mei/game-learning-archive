@@ -51,7 +51,7 @@
 | チョコパキ!（IDERIA） | 3538行 | SysFont("HG創英角ゴシックUB")→Noto差し替え・wav 37本 | 🔧 |
 | しまっぴー先生の覚えてクイズ | TyranoScript | pygbag対象外。TyranoScriptのブラウザ書き出しで対応可能（別方式・要確認） | 保留 |
 | Scratch 3作品（コンテスト） | Scratch | pygbag対象外。TurboWarp埋め込み等で対応可能（sb3の公開可否要確認） | 保留 |
-| Einar build（Unity/UE4） | exe | WebGLビルドはプロジェクトファイルが無いため不可（exeのみ） | ❌ |
+| SAM / Boosted platform（Unity/UE4） | exe | WebGLビルドはプロジェクトファイルが無いため不可（exeのみ） | ❌ |
 
 ## ビルド結果（2026-08-31 実施済み）
 

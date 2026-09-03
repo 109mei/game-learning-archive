@@ -51,7 +51,7 @@
 | ウサギの島点取りゲーム ◎ | Scratch | 卒論完成版/コンテスト/第１回コンテストゲーム/参加者A/ | 制作者名は非公開（匿名）。フォルダ名は参加者の下の名前のため伏せ字 |
 | Scratchのプロジェクト △ | Scratch | 同 /参加者B/ | 正式作品名要確認 |
 | ハチ避け ◎ | Scratch | 卒論完成版/コンテスト/参加者A/とわ/ | **制作者: 永野斗遠（本人・実名表示OK）**。「とわ」は本人のフォルダ |
-| Einar build △ | Unity / Unreal Engine 4 | 同 /参加者C/SAM/ ほか Boosted platform | SAM(Unity)とBoosted platform(UE4)の2作あり、コンテスト代表作要確認。**作品名「Einar build」は参加者Cの名前のローマ字表記を含むため要改称**（PRIVACY_CHECK §2 参照） |
+| SAM / Boosted platform △ | Unity / Unreal Engine 4 | 同 /参加者C/SAM/ ほか Boosted platform | SAM(Unity)とBoosted platform(UE4)の2作あり、コンテスト代表作要確認 |
 
 ## C. IDERIA制作
 | 作品 | 技術 | 場所 | 備考 |
