@@ -411,6 +411,33 @@ ${playableScript}`;
   out('index.html', page({ content, path: '/', home: true }));
 }
 
+// ---------- 実施プロジェクトごとのまとまり（§3-1） ----------
+// 1作品が複数のプロジェクトに属することがある（例: 第3回ゲームジャムの作品が
+// OneButtonGamesにも収録）。その場合は両方のプロジェクトに出す。
+function projectGroups() {
+  const withGames = activities
+    .map(a => ({ act: a, list: sortYearDesc(games.filter(g => (g.activities || []).includes(a.id))) }))
+    .filter(x => x.list.length);
+  // 新しい順。年の無い活動（IDERIAの制作物など）は最後にまとめる
+  withGames.sort((x, y) => (y.act.year || 0) - (x.act.year || 0)
+    || String(x.act.id).localeCompare(String(y.act.id)));
+  return withGames;
+}
+function projectHead(a, n) {
+  const cat = catById[a.category];
+  const meta = [
+    a.year != null ? `${a.year}年度` : '',
+    cat ? cat.name : '',
+    has(a.place) ? a.place : '',
+    `${n}作品`,
+  ].filter(Boolean);
+  return `<div class="proj-head">
+    <h3 class="proj-title" id="proj-${a.id}">${esc(a.title)}</h3>
+    <p class="proj-meta">${meta.map(m => `<span>${esc(m)}</span>`).join('')}</p>
+    ${has(a.summary) ? `<p class="proj-summary">${esc(a.summary)}</p>` : ''}
+    <p class="proj-more"><a href="/activities/${a.id}/">この活動の詳細</a></p>
+  </div>`;
+}
 // ---------- 作品一覧 /games/ ----------
 {
   const ord = Object.fromEntries(sortYearDesc(games).map((g, i) => [g.id, i]));
@@ -460,14 +487,24 @@ ${playableScript}`;
   </div>
 </div>
 <p class="result-count" id="count" role="status">${games.length} / ${games.length} 作品を表示中</p>`;
+  const groups = projectGroups();
   const content = `<div class="wrap page-pad">
 <h1 class="page-title">作品一覧</h1>
-<p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件のアーカイブです。カードを選ぶと詳細ページへ移動します。一度開いた作品には「発見済み」のスタンプが付きます。</p>
+<p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件を、<strong>実施したプロジェクトごと</strong>にまとめています。1つの作品が複数のプロジェクトに出ることがあります（第3回ゲームジャムの作品が OneButtonGames にも収録、など）。カードを選ぶと詳細ページへ移動します。一度開いた作品には「発見済み」のスタンプが付きます。</p>
 ${status}
 ${filters}
 <p class="kbd-hint"><kbd>/</kbd> で検索欄へ移動、<kbd>Esc</kbd> で解除できます。</p>
-<h2 class="vh">作品リスト</h2>
-<div class="grid" id="game-grid">${games.map(g => `<div class="gi" data-id="${g.id}">${gameCard(g)}</div>`).join('')}</div>
+<nav class="proj-jump" aria-label="プロジェクトから探す">
+  <span class="proj-jump-h">プロジェクトから探す</span>
+  ${groups.map(({ act, list }) => `<a href="#proj-${act.id}">${esc(act.title)}<b>${list.length}</b></a>`).join('')}
+</nav>
+<h2 class="vh">プロジェクトごとの作品</h2>
+<div id="game-grid">
+${groups.map(({ act, list }) => `<section class="proj" data-proj="${act.id}">
+  ${projectHead(act, list.length)}
+  <div class="grid">${list.map(g => `<div class="gi" data-id="${g.id}">${gameCard(g)}</div>`).join('')}</div>
+</section>`).join('')}
+</div>
 <p class="empty" id="empty" hidden>条件にあう作品が見つかりませんでした。</p>
 </div>
 <script>window.__GAMES__=${json(idx)};</script>

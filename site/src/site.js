@@ -260,8 +260,12 @@
   var grid = doc.getElementById('game-grid');
   if (grid && window.__GAMES__) {
     var games = window.__GAMES__;
+    // 1作品が複数のプロジェクトに出るので、id ごとに要素をまとめて持つ
     var items = {};
-    [].forEach.call(grid.querySelectorAll('.gi'), function (el) { items[el.dataset.id] = el; });
+    [].forEach.call(grid.querySelectorAll('.gi'), function (el) {
+      (items[el.dataset.id] = items[el.dataset.id] || []).push(el);
+    });
+    var projects = [].slice.call(grid.querySelectorAll('.proj'));
     var q = doc.getElementById('q');
     var fy = doc.getElementById('f-year'), fc = doc.getElementById('f-cat'),
       fg = doc.getElementById('f-genre'), ft = doc.getElementById('f-tech'),
@@ -328,9 +332,14 @@
           if (fstate === 'new' && isFound) ok = false;
           if (fstate === 'found' && !isFound) ok = false;
         }
-        var el = items[g.id];
-        if (el) { el.hidden = !ok; el.style.order = String(i); }
+        var els = items[g.id];
+        if (els) els.forEach(function (el) { el.hidden = !ok; el.style.order = String(i); });
         if (ok) n++;
+      });
+      // 中身が全部隠れたプロジェクトは見出しごと隠す
+      projects.forEach(function (sec) {
+        var vis = sec.querySelectorAll('.gi:not([hidden])').length;
+        sec.hidden = vis === 0;
       });
       if (count) count.textContent = n + ' / ' + games.length + ' 作品を表示中';
       if (empty) empty.hidden = n !== 0;
