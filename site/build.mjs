@@ -806,6 +806,8 @@ out('404.html', page({
 
 // ---------- static assets ----------
 copyDir(path.join(ROOT, 'public'), DIST);
+// GitHub Pages が万一「ブランチから公開」に切り替わってもJekyll処理を通さない保険
+fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
 fs.copyFileSync(path.join(SRC, 'styles.css'), path.join(DIST, 'assets/style.css'));
 fs.copyFileSync(path.join(SRC, 'site.js'), path.join(DIST, 'assets/site.js'));
