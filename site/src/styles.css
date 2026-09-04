@@ -145,6 +145,33 @@ html[data-theme="light"] .lay-5::after{background:radial-gradient(120% 80% at 50
 .surface{position:relative;overflow:hidden;padding:78px 0 120px;
   background:linear-gradient(180deg,rgba(20,90,120,.28),rgba(var(--layer-ink),.10))}
 .surface .wrap{position:relative;z-index:2}
+/* ============ サイトに入ったときの導入（§1-6） ============ */
+/* 重要: 要素の通常状態は「見える」まま。透明にするのは @keyframes の from だけ。
+   こうしておくと、演出を切った環境（prefers-reduced-motion で animation:none）でも
+   中身が消えない。opacity:0 を通常のスタイルに書いてはいけない。 */
+@keyframes enter-up{ from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+@keyframes enter-fade{ from{opacity:0} to{opacity:1} }
+@keyframes enter-slide{ from{opacity:0;transform:translateX(-28px)} to{opacity:1;transform:none} }
+
+/* 演出は html.anim-in が付いているときだけ。このクラスは head のスクリプトが
+   「読み込み時点で表示されている」場合にのみ付ける。バックグラウンドタブで開くと
+   アニメーションが進まず、fill-mode のせいで中身が透明のまま残るため。
+   JSが無効なときもクラスが付かず、演出なしで普通に表示される。 */
+
+/* トップ: 見出しから順に持ち上げる。最後の要素でも 0.83 秒で終わる */
+.anim-in .hero-in > *{animation:enter-up .55s cubic-bezier(.22,.9,.28,1) both}
+.anim-in .hero-in > :nth-child(2){animation-delay:.07s}
+.anim-in .hero-in > :nth-child(3){animation-delay:.14s}
+.anim-in .hero-in > :nth-child(4){animation-delay:.21s}
+.anim-in .hero-in > :nth-child(5){animation-delay:.28s}
+/* 作品サムネの帯は少し遅れて横から入る */
+.anim-in .hero-strip{animation:enter-slide .8s cubic-bezier(.22,.9,.28,1) .3s both}
+
+/* 下層ページ: 見出しまわりだけ軽く。移動のたびに長い演出をしない */
+.anim-in .page-title{animation:enter-up .42s cubic-bezier(.22,.9,.28,1) both}
+.anim-in .page-lead{animation:enter-up .42s cubic-bezier(.22,.9,.28,1) .06s both}
+.anim-in .crumbs{animation:enter-fade .42s ease-out both}
+
 /* ヒーローの背景に作品サムネを薄く敷く。文字だけの画面にしないための装飾 */
 .hero-strip{position:absolute;inset:auto 0 0 0;display:flex;gap:8px;padding:0 8px 8px;
   pointer-events:none;user-select:none;z-index:0;overflow:hidden;
@@ -533,6 +560,11 @@ html[data-theme="light"] .related{background:rgba(var(--layer-ink),.26)}
 .foot-copy{text-align:center;color:var(--tx-mut);font-size:12.5px;margin:30px 0 0}
 
 /* ============ モーション配慮 ============ */
+/* 印刷時は演出を止める。途中の状態で印刷されると中身が消えるため */
+@media print{
+  *,*::before,*::after{ animation:none !important }
+}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
   .card:hover,.btn:hover,.year-card:hover,.learn-card:hover,.cat-card:hover,.level-card:hover,.rel-card:hover{transform:none}

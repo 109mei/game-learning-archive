@@ -249,7 +249,7 @@ ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">\n<meta name="t
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${assetHash('styles.css')}">
-<script>document.documentElement.className+=' js';try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script>document.documentElement.className+=' js';if(!document.hidden)document.documentElement.className+=' anim-in';try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <script>window.__BASE__=${json(BASE)};window.__BADGES__=${json(BADGES)};</script>
 ${jsonLd ? `<script type="application/ld+json">${json(jsonLd).replace(/</g, '\u003c')}</script>` : ''}
 ${extraHead}
