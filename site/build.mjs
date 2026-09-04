@@ -421,6 +421,17 @@ const randomBtn = (cls = 'btn') => `<button type="button" class="${cls} js-only"
 // 泡（座標は固定値。prefers-reduced-motion では CSS 側で非表示）
 const playableScript = `<script>window.__PLAYABLE__=${json(playableGames.map(g => g.id))};</script>`;
 
+// ヒーローの背景に敷く作品サムネの帯（§1-4）。文字だけの画面にしないための装飾で、
+// 内容は下のカードと重複するため読み上げ対象から外す。
+function heroStrip() {
+  const shots = games.filter(g => g.thumbnail).map(g => g.thumbnail);
+  if (shots.length < 8) return '';
+  // 途切れずに流れて見えるよう2周ぶん並べる
+  const row = [...shots, ...shots].slice(0, 40);
+  return `<div class="hero-strip" aria-hidden="true">${row.map(u =>
+    `<img src="${u}" alt="" loading="lazy" decoding="async"${sizeAttr(u)}>`).join('')}</div>`;
+}
+
 // ---------- HOME ----------
 {
   const [L0, L1, L2, L3, L4, L5] = LAYERS;
@@ -463,6 +474,7 @@ const playableScript = `<script>window.__PLAYABLE__=${json(playableGames.map(g =
 
   const content = `
 <section class="layer surface" id="${L0.id}">
+  ${heroStrip()}
   <div class="wrap hero-in">
     <p class="hero-eyebrow">PLAY + PLACE</p>
     <h1 class="hero-title">${esc(site.tagline)}。</h1>
