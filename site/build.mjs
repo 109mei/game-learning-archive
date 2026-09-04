@@ -284,6 +284,25 @@ ${relatedHTML}
 </html>`;
 }
 
+// ---------- 操作デバイス ----------
+// 訪問者の多くはスマートフォンで見るため、開く前にキーボードの要否が分かるようにする。
+// 判定は controls の記述だけを根拠にし、勝手な推測はしない。
+// 「ダブルタップ」はキーの連打を指す作品があるため、指の操作としては数えない。
+function inputKind(g) {
+  if (!g.play?.playable) return null;
+  const c = g.controls || '';
+  const key = /キー|Enter|スペース|矢印|ESC/.test(c);
+  const pointer = /クリック|マウス/.test(c);
+  // バッジは「キーボードが要るか」だけを答える。内訳は note で説明する
+  if (key && pointer) return { label: '⌨ キーボード', note: 'キーボードとマウスの両方を使います。キーボードのない端末では遊べません。' };
+  if (key) return { label: '⌨ キーボード', note: 'キーボードで操作します。キーボードのない端末では遊べません。' };
+  if (pointer) return { label: '🖱 マウス', note: 'マウス（クリック）だけで操作します。' };
+  return null;
+}
+const inputBadge = g => {
+  const k = inputKind(g);
+  return k ? `<span class="chip chip-input" title="${esc(k.note)}">${esc(k.label)}</span>` : '';
+};
 // ---------- partials ----------
 const badgePlay = `<span class="badge badge-play">▶ ブラウザで遊べる</span>`;
 function gameCard(g) {
@@ -301,6 +320,7 @@ function gameCard(g) {
     <p class="card-meta">
       ${has(g.genre) ? `<span class="chip chip-genre">${esc(g.genre)}</span>` : ''}
       ${g.year != null ? `<span class="chip chip-year">${g.year}年度</span>` : ''}
+      ${inputBadge(g)}
     </p>
     ${orgNames.length || acts.length ? `<p class="card-org">${esc([orgNames[0], acts[0]?.title].filter(Boolean).join(' ／ '))}</p>` : ''}
   </div></a>`;
@@ -372,7 +392,7 @@ const playableScript = `<script>window.__PLAYABLE__=${json(playableGames.map(g =
   const catCards = ['game-jam', 'contest', 'class', 'collab', 'ideria'].map(id => {
     const c = catById[id];
     const count = games.filter(g => gameCatsOf(g).includes(id)).length;
-    return `<a class="cat-card" href="/${c.slug}/"><span class="cat-name">${esc(c.name)}</span><span class="cat-desc">${esc(c.desc)}</span><span class="cat-count">${count} 作品</span></a>`;
+    return `<a class="cat-card" href="/${c.slug}/"><span class="cat-name">${esc(c.name)}</span><span class="cat-desc">${esc(c.desc)}</span><span class="cat-count">${count ? `${count} 作品` : '教材のみ'}</span></a>`;
   }).join('');
 
   const content = `
@@ -554,7 +574,7 @@ for (const g of games) {
   </div>
 </div>
 ${has(g.description) ? `<section class="detail-sec"><h2>ゲーム概要</h2><p>${esc(g.description)}</p></section>` : ''}
-${has(g.controls) ? `<section class="detail-sec"><h2>操作方法</h2><p>${esc(g.controls)}</p></section>` : ''}
+${has(g.controls) ? `<section class="detail-sec"><h2>操作方法</h2><p>${esc(g.controls)}</p>${inputKind(g) ? `<p class="note">${esc(inputKind(g).note)}</p>` : ''}</section>` : ''}
 ${has(g.background) ? `<section class="detail-sec"><h2>制作背景</h2><p>${esc(g.background)}</p></section>` : ''}
 ${has(g.highlights) ? `<section class="detail-sec"><h2>工夫した点</h2><p>${esc(g.highlights)}</p></section>` : ''}
 ${topics.length ? `<section class="detail-sec"><h2>このゲームで使われている技術を学ぶ</h2><p class="chips">${topics.map(t => `<a class="chip chip-learn" href="/learn/${t.slug}/">${esc(t.title)}</a>`).join(' ')}</p></section>` : ''}
@@ -586,6 +606,7 @@ for (const g of playableGames) {
   const content = `<div class="wrap page-pad play-page">
 <nav class="crumbs" aria-label="パンくず"><a href="/">HOME</a> › <a href="/games/">作品一覧</a> › <a href="/games/${g.id}/">${esc(g.title)}</a> › <span>プレイ</span></nav>
 <h1 class="page-title">${esc(g.title)} をプレイ</h1>
+${inputKind(g) ? `<p class="play-note"><b>${esc(inputKind(g).label)}</b> — ${esc(inputKind(g).note)}</p>` : ''}
 <div class="play-frame-wrap">
   <iframe id="game-frame" src="${g.play.url}" title="${esc(g.title)}（ゲーム画面）" allow="autoplay; fullscreen" allowfullscreen loading="eager"></iframe>
 </div>
@@ -789,7 +810,7 @@ ${rel.length ? `<section class="detail-sec"><h2>この技術を使っている�
 <h2>掲載している活動</h2>
 <p><a href="/game-jams/">ゲームジャム</a>、<a href="/contests/">ゲームコンテスト</a>、<a href="/classes/">ゲームプログラミング授業</a>、<a href="/collabs/">高大連携</a>、<a href="/ideria/">IDERIA制作</a>などの活動を記録しています。作品と活動は相互にリンクしています。</p>
 <h2>作品・データについて</h2>
-<p>学生作品の制作者名は原則として匿名（学校名・チーム表記）で掲載しています。掲載内容に問題がある場合や、確認できていない情報（「要確認」表記）について情報をお持ちの場合は、運営までお知らせください。ゲームのWeb版はブラウザで動かすための最小限の変更（フルスクリーン解除・音声形式変換など）のみを行っており、ゲーム内容は変更していません。</p>
+<p>学生作品の制作者名は原則として匿名（学校名・チーム表記）で掲載しています。掲載内容に問題がある場合や、確認できていない情報（「要確認」表記）について情報をお持ちの場合は、${site.repoUrl ? `<a href="${esc(site.repoUrl)}/issues">GitHubのIssues</a>からお知らせください。` : '運営までお知らせください。'}ゲームのWeb版はブラウザで動かすための最小限の変更（フルスクリーン解除・音声形式変換など）のみを行っており、ゲーム内容は変更していません。</p>
 <h2>IDERIAについて</h2>
 <p>IDERIAは本アーカイブの掲載元のひとつで、ゲーム制作・ワークショップ・高大連携などの活動を行っています。${site.ideriaOfficialUrl ? `詳しくは<a href="${esc(site.ideriaOfficialUrl)}">IDERIA公式サイト</a>をご覧ください。` : 'IDERIA公式サイトは現在準備中です。'}</p>
 </div>`;

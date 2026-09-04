@@ -113,37 +113,14 @@ main:focus{outline:none}
   .nav a{padding:10px 12px;font-size:15px}
 }
 
-/* ============ ヘッダー（HUD） ============ */
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* スマホ: 画面上部の細帯 */
-@media(max-width:899px){
-    padding:0 14px;background:var(--bar-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-    font-weight:700;font-size:12.5px;border-radius:999px;padding:0 12px;min-height:26px;cursor:pointer;flex:none}
-    background:var(--bar-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:var(--shadow);
-    padding:4px 14px 8px}
-}
-/* PC: 右端の縦レール（コンパス風） */
-@media(min-width:900px){
-    padding:14px 10px;background:var(--bar-bg);backdrop-filter:blur(8px);border:1px solid var(--line);
-    border-radius:26px;box-shadow:var(--shadow)}
-    background:transparent}
-    background:color-mix(in srgb,var(--tx-mut) 55%,transparent);transition:background .15s,transform .15s}
-    padding:3px 9px;border-radius:8px;background:var(--bg-card);border:1px solid var(--line);color:var(--tx);
-    font-size:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .15s;box-shadow:var(--shadow)}
-}
 
 /* ============ 層（トップページ） ============ */
 .layer{position:relative;padding:64px 0 54px;scroll-margin-top:calc(var(--header-h) + 14px);overflow:hidden}
-/* 層境界の目盛り（ */
+/* セクション境界の目盛り */
 .layer::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;pointer-events:none;
   background:
     repeating-linear-gradient(90deg,color-mix(in srgb,var(--accent) 34%,transparent) 0 1px,transparent 1px 26px) top left/100% 7px no-repeat,
     linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 45%,transparent),transparent) top left/100% 1px no-repeat}
-/* 深度のウォーターマーク */
-  font-family:var(--mono);font-weight:900;line-height:.9;letter-spacing:-.03em;
-  font-size:clamp(52px,10vw,124px);color:transparent;opacity:.42;
-  -webkit-text-stroke:1.5px color-mix(in srgb,var(--accent) 38%,transparent)}
 .layer .wrap{position:relative;z-index:1}
 /* 深いほど周辺を暗く */
 .lay-3::after,.lay-4::after,.lay-5::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -159,7 +136,6 @@ html[data-theme="light"] .lay-5::after{background:radial-gradient(120% 80% at 50
 .lay-4{background:linear-gradient(180deg,rgba(var(--layer-ink),.54),rgba(var(--layer-ink),.68))}
 .lay-5{background:linear-gradient(180deg,rgba(var(--layer-ink),.68),rgba(var(--layer-ink),.88))}
 .layer-head{margin-bottom:26px;max-width:820px}
-  font-size:12.5px;font-weight:900;letter-spacing:.06em}
 .layer-head h2{font-size:clamp(24px,3.4vw,32px);font-weight:900;margin:0 0 8px;line-height:1.35;letter-spacing:.02em}
 .layer-flavor{margin:0;color:var(--tx-mut);font-size:15px}
 .layer-actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
@@ -174,17 +150,6 @@ html[data-theme="light"] .lay-5::after{background:radial-gradient(120% 80% at 50
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 24px}
 .hero-stats{display:flex;gap:20px 24px;flex-wrap:wrap;font-size:12.5px;color:var(--tx-mut);margin:0}
 .hero-stats b{font-size:21px;color:var(--tx);margin-right:4px;font-variant-numeric:tabular-nums}
-/* 泡 */
-  border:1px solid rgba(180,240,250,.55);
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.42),rgba(160,235,245,.10) 58%,transparent 70%);
-  box-shadow:0 0 6px rgba(150,230,245,.18);
-  opacity:0;animation:rise var(--d) linear var(--delay) infinite}
-@keyframes rise{
-  0%{transform:translateY(0) translateX(0);opacity:0}
-  10%{opacity:.72}
-  85%{opacity:.5}
-  100%{transform:translateY(calc(-1 * var(--rise,560px))) translateX(18px);opacity:0}
-}
 
 /* ============ ボタン ============ */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-weight:700;font-size:14px;
@@ -222,6 +187,11 @@ html[data-theme="light"] .lay-5::after{background:radial-gradient(120% 80% at 50
 .badge{position:absolute;left:10px;bottom:10px;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:900}
 .badge-play{background:var(--play);color:var(--play-tx)}
 .badge-line .badge{position:static;display:inline-block}
+/* 操作デバイスの表示。スマホで開く前にキーボードの要否が分かるようにする */
+.chip-input{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));color:var(--tx)}
+.play-note{margin:0 0 14px;padding:10px 14px;border-radius:10px;font-size:13.5px;
+  background:var(--bg-soft);border:1px solid var(--line);color:var(--tx)}
+.play-note b{font-weight:900}
 .card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1 1 auto}
 .card-title{margin:0;font-size:16.5px;font-weight:900;line-height:1.45}
 .card-summary{margin:0;font-size:13px;color:var(--tx-mut);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -498,15 +468,17 @@ pre.code.wrapped code{min-width:0}
 .route p{margin:0;font-size:13px;color:var(--tx-mut)}
 
 /* ============ トースト（実績） ============ */
-.toast-wrap{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;
-  gap:8px;align-items:center;pointer-events:none;width:min(92vw,420px)}
+/* トーストは本文に重ねない。スマホは画面上部、PCは右下に出す */
+.toast-wrap{position:fixed;z-index:80;display:flex;flex-direction:column;
+  gap:8px;align-items:stretch;pointer-events:none;
+  top:calc(var(--header-h) + 10px);left:12px;right:12px}
 .toast{display:flex;align-items:center;gap:10px;background:var(--bg-card);border:1px solid var(--stamp);border-radius:12px;
   padding:10px 16px;box-shadow:var(--shadow-hover);font-size:13.5px;font-weight:700;color:var(--tx);
   animation:toast-in .35s ease-out}
 .toast i{font-style:normal;font-size:20px}
 .toast small{display:block;font-weight:400;color:var(--tx-mut);font-size:12.5px}
 @keyframes toast-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(min-width:900px){.toast-wrap{bottom:22px;width:min(46vw,420px)}}
+@media(min-width:900px){.toast-wrap{top:auto;bottom:70px;left:auto;right:16px;width:min(38vw,380px)}}
 
 /* ============ 上へ戻るボタン ============ */
 .surface-btn{position:fixed;right:16px;bottom:18px;z-index:45;display:none;align-items:center;gap:8px;
@@ -515,9 +487,6 @@ pre.code.wrapped code{min-width:0}
 .surface-btn.show{display:inline-flex}
 .surface-btn:hover{background:var(--accent-soft)}
 .surface-btn .up{font-size:14px}
-  border:1px solid var(--accent);opacity:0;pointer-events:none}
-@keyframes bub{0%{opacity:.9;transform:translateY(0) scale(.6)}100%{opacity:0;transform:translateY(-46px) scale(1.2)}}
-@media(min-width:900px){.surface-btn{right:84px}}
 
 /* ============ 関連サイト ============ */
 .related{border-top:1px solid var(--line);background:rgba(var(--layer-ink),.5);padding:34px 0 32px;margin-top:40px}
