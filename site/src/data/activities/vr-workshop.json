@@ -2,6 +2,8 @@
   "id": "vr-workshop",
   "title": "VR体験（VR空間での3Dモデル制作）",
   "category": "workshop",
+  "_comment_gameRelated": "VR空間での3Dモデル制作体験で、ゲーム制作の活動ではない。トップの「きろく」には出さない（作品も0件）。活動一覧・活動ページには残す。",
+  "gameRelated": false,
   "subCategories": [
     "collab"
   ],

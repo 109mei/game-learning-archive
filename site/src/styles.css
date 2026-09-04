@@ -451,6 +451,12 @@ div.detail-hero{display:flex}
 /* ============ プレイページ ============ */
 .play-frame-wrap{background:#000;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;max-height:76vh}
 .play-frame-wrap iframe{width:100%;height:100%;border:0;display:block}
+/* 全画面のときは画面いっぱいに広げ、16:10を保ったまま中央に置く。
+   縦横どちらが余っても、はみ出さない最大サイズになる。 */
+.play-frame-wrap:fullscreen{width:100vw;height:100vh;max-height:none;aspect-ratio:auto;
+  border:0;border-radius:0;background:#000;display:grid;place-items:center}
+.play-frame-wrap:fullscreen iframe{width:min(100vw,calc(100vh * 1.6));
+  height:min(100vh,calc(100vw / 1.6))}
 .play-tools{display:flex;gap:12px;margin:16px 0 0;flex-wrap:wrap}
 
 /* ============ ソースビューア ============ */

@@ -465,7 +465,9 @@ function heroStrip() {
     </a>`).join('');
 
   // 最深部: 活動の記録
-  const recentActs = sortYearDesc(activities).slice(0, 3);
+  // トップの「きろく」はゲーム制作の活動だけを出す。
+  // VR体験のようにゲームを作らない活動は gameRelated:false を立てて除く。
+  const recentActs = sortYearDesc(activities.filter(a => a.gameRelated !== false)).slice(0, 3);
   const catCards = ['game-jam', 'contest', 'class', 'collab', 'ideria'].map(id => {
     const c = catById[id];
     const count = games.filter(g => gameCatsOf(g).includes(id)).length;

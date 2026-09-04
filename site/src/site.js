@@ -435,12 +435,43 @@
     });
   });
   // 全画面（プレイページ）
+  // iframe 単体ではなく外枠を全画面にする。iframe だけだと中のゲームが
+  // 画面いっぱいに広がらず、黒地に小さく表示されてしまう。
   var fsBtn = doc.getElementById('fs-btn');
-  if (fsBtn) fsBtn.addEventListener('click', function () {
-    var f = doc.getElementById('game-frame');
-    if (!f) return;
-    (f.requestFullscreen || f.webkitRequestFullscreen || function () { }).call(f);
-  });
+  var fsWrap = doc.querySelector('.play-frame-wrap');
+  var FS_ON = '⛶ 全画面をやめる', FS_OFF = '⛶ 全画面で遊ぶ';
+  function fsNow() { return doc.fullscreenElement || doc.webkitFullscreenElement || null; }
+  if (fsBtn && fsWrap) {
+    // 使えない環境ではボタン自体を出さない（押しても何も起きないのを防ぐ）
+    if (!(doc.fullscreenEnabled || doc.webkitFullscreenEnabled)) {
+      fsBtn.hidden = true;
+    } else {
+      fsBtn.addEventListener('click', function () {
+        if (fsNow()) {
+          (doc.exitFullscreen || doc.webkitExitFullscreen || function () { }).call(doc);
+          return;
+        }
+        var req = fsWrap.requestFullscreen || fsWrap.webkitRequestFullscreen;
+        var done = false;
+        function failed() {
+          if (done || fsNow()) return;
+          done = true;
+          fsBtn.textContent = '⛶ 全画面にできませんでした';
+          setTimeout(function () { fsBtn.textContent = FS_OFF; }, 2600);
+        }
+        var p;
+        try { p = req.call(fsWrap); } catch (e) { failed(); return; }
+        // 失敗を黙って捨てない。何も起きないとボタンが壊れて見える。
+        // 埋め込みブラウザなど、成功も失敗も返さず無反応の環境があるため
+        // 時間切れでも失敗として扱う。
+        if (p && p.then) p.then(function () { done = true; }, failed);
+        setTimeout(failed, 1200);
+      });
+      doc.addEventListener('fullscreenchange', function () {
+        fsBtn.textContent = fsNow() ? FS_ON : FS_OFF;
+      });
+    }
+  }
 
   // ---------------------------------------------------------- 初期化
   paintStamps();
