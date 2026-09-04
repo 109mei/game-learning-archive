@@ -310,6 +310,8 @@
             : String(a.title).localeCompare(String(b.title), 'ja');
         }
         if (mode === 'act') return a.ord - b.ord;
+        // 遊べるものが埋もれないようにする並び（同順位は作品No.順）
+        if (mode === 'play') return (b.playable - a.playable) || (a.no - b.no);
         return a.no - b.no;
       });
       return arr;

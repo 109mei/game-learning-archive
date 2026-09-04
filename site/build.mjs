@@ -8,8 +8,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import crypto from 'node:crypto';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
+
+// CSS/JS の URL に内容のハッシュを付ける。付けないと、更新してもブラウザが
+// 古いキャッシュを使い続けて表示が変わらないことがある。
+const assetHash = rel => {
+  const h = crypto.createHash('sha1')
+    .update(fs.readFileSync(path.join(ROOT, 'src', rel))).digest('hex').slice(0, 8);
+  return `/assets/${rel === 'styles.css' ? 'style.css' : rel}?v=${h}`;
+};
 const SRC = path.join(ROOT, 'src');
 const DIST = path.join(ROOT, 'dist');
 const GS = path.join(ROOT, 'game-sources');
@@ -206,7 +215,7 @@ const relatedHTML = RELATED_SITES.length ? `<section class="related" aria-labell
   </div>
 </section>` : '';
 
-function page({ title, desc, path: cur = '/', content, extraHead = '', bodyClass = '', discover = '', readCode = false, home = false, url = '', image = '' }) {
+function page({ title, desc, path: cur = '/', content, extraHead = '', bodyClass = '', discover = '', readCode = false, home = false, url = '', image = '', jsonLd = null }) {
   const fullTitle = title ? `${title} | ${site.title}` : `${site.title} — ${site.tagline}`;
   const ogImage = ORIGIN ? absUrl(image || '/images/og-default.png') : '';
   const ogUrl = ORIGIN ? absUrl(url || cur) : '';
@@ -235,12 +244,14 @@ ${ogUrl ? `<meta property="og:url" content="${esc(ogUrl)}">\n<link rel="canonica
 ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="${esc(ogImage)}">` : '<meta name="twitter:card" content="summary">'}
 <meta name="theme-color" content="#040c16">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="${assetHash('styles.css')}">
 <script>document.documentElement.className+=' js';try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
 <script>window.__BASE__=${json(BASE)};window.__BADGES__=${json(BADGES)};</script>
+${jsonLd ? `<script type="application/ld+json">${json(jsonLd).replace(/</g, '\u003c')}</script>` : ''}
 ${extraHead}
 </head>
 <body${bodyAttrs}>
@@ -279,11 +290,66 @@ ${relatedHTML}
 <button class="surface-btn js-only" id="surface-btn" type="button" hidden aria-label="ページの最上部へ戻る">
   <span class="up" aria-hidden="true">↑</span>上へ戻る</button>
 <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
-<script src="/assets/site.js" defer></script>
+<script src="${assetHash('site.js')}" defer></script>
 </body>
 </html>`;
 }
 
+// ---------- 構造化データ（JSON-LD） ----------
+// 検索結果での見え方のため。書けるのは掲載データから確実に言えることだけにする。
+const siteLd = () => (ORIGIN ? {
+  '@context': 'https://schema.org', '@type': 'WebSite',
+  name: site.title, alternateName: site.subtitle, url: absUrl('/'),
+  description: site.description, inLanguage: 'ja',
+} : null);
+function crumbLd(items) {
+  if (!ORIGIN) return null;
+  return {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: items.map(([name, u], i) => ({
+      '@type': 'ListItem', position: i + 1, name, item: absUrl(u),
+    })),
+  };
+}
+function gameLd(g) {
+  if (!ORIGIN) return null;
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'VideoGame',
+    name: g.title, url: absUrl(`/games/${g.id}/`), inLanguage: 'ja',
+  };
+  if (has(g.summary)) ld.description = g.summary;
+  if (g.thumbnail) ld.image = absUrl(g.thumbnail);
+  if (has(g.genre)) ld.genre = g.genre;
+  if (has(g.creatorDisplay)) ld.creator = { '@type': 'Organization', name: g.creatorDisplay };
+  if (g.play?.playable) { ld.gamePlatform = 'Web browser'; ld.playMode = 'SinglePlayer'; ld.isAccessibleForFree = true; }
+  return ld;
+}
+// ---------- 画像の実寸 ----------
+// width/height を出さないと読み込み中にレイアウトがずれる（CLS）。
+// 依存を増やさないため、PNG と JPEG のヘッダだけを自前で読む。
+const _sizeCache = new Map();
+function imgSize(webPath) {
+  if (_sizeCache.has(webPath)) return _sizeCache.get(webPath);
+  let out = null;
+  try {
+    const buf = fs.readFileSync(path.join(ROOT, 'public', webPath.replace(/^\//, '')));
+    if (buf.length > 24 && buf.toString('ascii', 1, 4) === 'PNG') {
+      out = { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+    } else if (buf[0] === 0xFF && buf[1] === 0xD8) {
+      for (let i = 2; i + 9 < buf.length;) {
+        if (buf[i] !== 0xFF) { i++; continue; }
+        const m = buf[i + 1];
+        if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) {
+          out = { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) }; break;
+        }
+        i += 2 + buf.readUInt16BE(i + 2);
+      }
+    }
+  } catch { /* 画像が無いときは属性を出さない */ }
+  _sizeCache.set(webPath, out);
+  return out;
+}
+const sizeAttr = u => { const d = imgSize(u); return d ? ` width="${d.w}" height="${d.h}"` : ''; };
 // ---------- 操作デバイス ----------
 // 訪問者の多くはスマートフォンで見るため、開く前にキーボードの要否が分かるようにする。
 // 判定は controls の記述だけを根拠にし、勝手な推測はしない。
@@ -428,7 +494,7 @@ ${layer(L5, 5, `<div class="grid grid-3">${recentActs.map(activityCard).join('')
   <p class="layer-actions"><a class="btn btn-primary" href="/activities/">活動記録をすべて見る</a><a class="btn" href="/game-jams/">ゲームジャム一覧</a><a class="btn" href="/years/">年度別アーカイブ</a></p>
   <div class="cat-grid" style="margin-top:26px">${catCards}</div>`)}
 ${playableScript}`;
-  out('index.html', page({ content, path: '/', home: true }));
+  out('index.html', page({ content, path: '/', home: true, jsonLd: siteLd() }));
 }
 
 // ---------- 実施プロジェクトごとのまとまり（§3-1） ----------
@@ -491,7 +557,7 @@ function projectHead(a, n) {
 <div class="filters" id="filters">
   <div class="filters-row">
     <input type="search" id="q" placeholder="タイトル・活動・技術などで検索" aria-label="作品を検索">
-    <select id="f-sort" aria-label="並び替え"><option value="no">並び: 作品No.順</option><option value="name">並び: 名前順（辞書順）</option><option value="act">並び: 活動・年度順</option></select>
+    <select id="f-sort" aria-label="並び替え"><option value="no">並び: 作品No.順</option><option value="name">並び: 名前順（辞書順）</option><option value="act">並び: 活動・年度順</option><option value="play">並び: 遊べる作品を先に</option></select>
     <button type="button" class="btn btn-sm js-only" hidden id="filter-toggle" aria-expanded="false" aria-controls="filters-more">絞り込み ▾</button>
     ${randomBtn('btn btn-sm')}
   </div>
@@ -559,7 +625,7 @@ for (const g of games) {
 <div class="detail-grid">
   <div class="detail-media">${main}
     <p class="badge-line"><span class="chip chip-tech">作品No.${dex(g.id)}</span>${g.play?.playable ? badgePlay : ''}<span class="found-mark" id="found-mark">発見済み</span></p>
-    ${shots.length ? `<div class="shot-row">${shots.map(u => `<img src="${u}" alt="${esc(g.title)}のスクリーンショット" loading="lazy">`).join('')}</div>` : ''}
+    ${shots.length ? `<div class="shot-row">${shots.map(u => `<img src="${u}" alt="${esc(g.title)}のスクリーンショット" loading="lazy"${sizeAttr(u)}>`).join('')}</div>` : ''}
   </div>
   <div class="detail-info">
     <h1 class="page-title">${esc(g.title)}</h1>
@@ -590,6 +656,7 @@ ${has(g.webVersionNote) ? `<section class="detail-sec"><h2>Web版について</h
   out(`games/${g.id}/index.html`, page({
     title: g.title, desc: g.summary, path: '/games/', content, discover: g.id,
     url: `/games/${g.id}/`, image: g.thumbnail || '',
+    jsonLd: [gameLd(g), crumbLd([['HOME', '/'], ['作品一覧', '/games/'], [g.title, `/games/${g.id}/`]])].filter(Boolean),
   }));
 }
 
@@ -697,10 +764,12 @@ ${has(a.summary) ? `<p class="detail-summary">${esc(a.summary)}</p>` : ''}
 </dl>
 ${has(a.description) ? `<section class="detail-sec"><h2>概要</h2><p>${esc(a.description)}</p></section>` : ''}
 ${ag.length ? `<section class="detail-sec"><h2>制作された作品（${ag.length}）</h2>${cardGrid(ag.map(gameCard))}</section>` : ''}
-${(a.photos || []).length ? `<section class="detail-sec"><h2>活動写真</h2><div class="shot-row">${a.photos.map(u => `<img src="${u}" alt="${esc(a.title)}の活動写真" loading="lazy">`).join('')}</div></section>` : ''}
+${(a.photos || []).length ? `<section class="detail-sec"><h2>活動写真</h2><div class="shot-row">${a.photos.map(u => `<img src="${u}" alt="${esc(a.title)}の活動写真" loading="lazy"${sizeAttr(u)}>`).join('')}</div></section>` : ''}
 ${(a.relatedDocs || []).length ? `<section class="detail-sec"><h2>関連資料</h2><ul>${a.relatedDocs.map(d => `<li><a href="${esc(d.url)}"${/^https?:/.test(d.url) ? ' target="_blank" rel="noopener"' : ''}>${esc(d.title)}${/^https?:/.test(d.url) ? ' ↗' : ''}</a></li>`).join('')}</ul></section>` : ''}
 </div>`;
-  out(`activities/${a.id}/index.html`, page({ title: a.title, desc: a.summary, path: '/activities/', content }));
+  out(`activities/${a.id}/index.html`, page({ title: a.title, desc: a.summary, path: '/activities/', content,
+    url: `/activities/${a.id}/`,
+    jsonLd: crumbLd([['HOME', '/'], ['活動', '/activities/'], [a.title, `/activities/${a.id}/`]]) }));
 }
 
 // ---------- ゲームジャム一覧（年度→開催回） ----------
