@@ -264,7 +264,9 @@ html[data-theme="light"] a.chip:hover{filter:brightness(.96)}
 .proj-meta span{font-size:12px;font-weight:700;color:var(--tx-mut);
   border:1px solid var(--line);border-radius:999px;padding:2px 9px}
 .proj-summary{margin:8px 0 0;font-size:13.5px;color:var(--tx-mut);max-width:70ch}
+/* 指で押せる大きさを確保する（24px以上・WCAG 2.5.8） */
 .proj-more{margin:8px 0 0;font-size:13px}
+.proj-more a{display:inline-block;padding:4px 0;min-height:24px}
 @media(max-width:700px){
   /* 11個が縦積みになると作品まで遠いので、横スクロールの並びにする（.badge-shelf と同じ方式）*/
   .proj-jump{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:12px}
