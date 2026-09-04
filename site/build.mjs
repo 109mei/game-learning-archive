@@ -465,9 +465,17 @@ function heroStrip() {
     </a>`).join('');
 
   // 最深部: 活動の記録
-  // トップの「きろく」はゲーム制作の活動だけを出す。
-  // VR体験のようにゲームを作らない活動は gameRelated:false を立てて除く。
-  const recentActs = sortYearDesc(activities.filter(a => a.gameRelated !== false)).slice(0, 3);
+  // トップの「きろく」に出すのは ゲームジャム・ゲームコンテスト・
+  // ゲームプログラミング授業 の3種別だけ。高大連携やIDERIA制作、
+  // VR体験のワークショップはここには出さない（活動一覧には残る）。
+  const RECORD_CATS = ['game-jam', 'contest', 'class'];
+  // 「新しい順」は年度だけでなく実際の日付で決める。年度だけで並べると
+  // 同じ年度内が回数順になり、第3回より第1回が先に出てしまう。
+  const actWhen = a => (a.dates || []).slice().sort().pop() || (a.year != null ? a.year + '-00' : '');
+  const recentActs = activities
+    .filter(a => RECORD_CATS.includes(a.category))
+    .sort((x, y) => String(actWhen(y)).localeCompare(String(actWhen(x))))
+    .slice(0, 3);
   const catCards = ['game-jam', 'contest', 'class', 'collab', 'ideria'].map(id => {
     const c = catById[id];
     const count = games.filter(g => gameCatsOf(g).includes(id)).length;
