@@ -407,15 +407,25 @@ kbd{display:inline-block;padding:1px 8px;border:1px solid var(--line);border-bot
   background:var(--bg-soft);font-family:var(--mono);font-size:12.5px;color:var(--tx)}
 
 /* ============ 詳細 ============ */
-.detail-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:start;margin-bottom:8px}
-@media(max-width:800px){.detail-grid{grid-template-columns:1fr}}
-.detail-hero{width:100%;border-radius:var(--radius);border:1px solid var(--line);aspect-ratio:16/10;object-fit:cover}
+/* 作品詳細は対象が1つだけなので、枠を減らして作品を大きく見せる（§1-8・美術館型）。
+   一覧のように見比べる場ではないため、カードの装飾を持ち込まない。 */
+.detail-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;
+  align-items:start;margin-bottom:8px}
+/* 1カラムに折り返したとき、作品名より先に画像2〜3枚が来て「何を見ているか」が
+   分からなくなっていた。狭い画面では 作品名→概要→操作ボタン→画像 の順にする。 */
+@media(max-width:800px){
+  .detail-grid{grid-template-columns:1fr;gap:24px}
+  .detail-info{order:1}
+  .detail-media{order:2}
+}
+.detail-hero{width:100%;border-radius:var(--r-md);border:1px solid var(--hairline);
+  aspect-ratio:16/10;object-fit:cover;box-shadow:var(--shadow)}
 div.detail-hero{display:flex}
 .badge-line{margin:10px 0 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .found-mark{display:none;padding:4px 10px;border-radius:var(--r-sm);font-size:12.5px;font-weight:900;letter-spacing:.06em;
   color:var(--stamp);background:var(--stamp-soft);border:2px solid var(--stamp)}
-.shot-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.shot-row img{width:calc(50% - 5px);border-radius:var(--r-md);border:1px solid var(--line)}
+.shot-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.shot-row img{width:calc(50% - 6px);border-radius:var(--r-sm);border:1px solid var(--hairline)}
 .detail-summary{font-size:16.5px;color:var(--tx-mut);margin:0 0 16px}
 .detail-actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 24px;align-items:center}
 .def{margin:0;border-top:1px solid var(--line)}
