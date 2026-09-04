@@ -451,6 +451,18 @@ div.detail-hero{display:flex}
 /* ============ プレイページ ============ */
 .play-frame-wrap{background:#000;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;max-height:76vh}
 .play-frame-wrap iframe{width:100%;height:100%;border:0;display:block}
+/* 読み込み中の案内。ゲームが動き出したら消す */
+.play-loading{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;text-align:center;padding:0 24px;
+  background:var(--thumb-bg);color:var(--tx)}
+.play-loading b{font-size:15px;font-weight:800}
+.play-loading small{font-size:12.5px;color:var(--tx-mut)}
+.play-loading .spin{width:26px;height:26px;border-radius:50%;
+  border:3px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.play-loading .spin{animation:none}}
+.play-hint{margin:12px 0 0;font-size:13.5px;color:var(--tx-mut);text-align:center}
 /* 全画面のときは画面いっぱいに広げ、16:10を保ったまま中央に置く。
    縦横どちらが余っても、はみ出さない最大サイズになる。 */
 .play-frame-wrap:fullscreen{width:100vw;height:100vh;max-height:none;aspect-ratio:auto;

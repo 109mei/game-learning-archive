@@ -700,8 +700,16 @@ for (const g of playableGames) {
 <h1 class="page-title">${esc(g.title)} をプレイ</h1>
 ${inputKind(g) ? `<p class="play-note"><b>${esc(inputKind(g).label)}</b> — ${esc(inputKind(g).note)}</p>` : ''}
 <div class="play-frame-wrap">
+  <!-- 初回は20MBほど読み込むため、黙って黒い画面を見せない -->
+  <div class="play-loading js-only" id="play-loading" role="status" hidden>
+    <span class="spin" aria-hidden="true"></span>
+    <b>ゲームを読み込んでいます…</b>
+    <small>初回は20MBほど読み込むため、少し時間がかかります</small>
+  </div>
   <iframe id="game-frame" src="${g.play.url}" title="${esc(g.title)}（ゲーム画面）" allow="autoplay; fullscreen" allowfullscreen loading="eager"></iframe>
 </div>
+<!-- js-only は付けない。付けると読み込み中から出てしまう（表示は準備完了後にJSが行う） -->
+<p class="play-hint" id="play-hint" hidden>▶ ゲーム画面をクリックすると始まります</p>
 <p class="play-tools"><button type="button" class="btn js-only" hidden id="fs-btn">⛶ 全画面で遊ぶ</button><a class="btn" href="/games/${g.id}/">作品の詳細へ</a>${g.source?.available ? `<a class="btn" href="/source/${g.id}/">&lt;/&gt; ソースコードを見る</a>` : ''}${randomBtn()}</p>
 ${has(g.controls) ? `<section class="detail-sec"><h2>操作方法</h2><p>${esc(g.controls)}</p></section>` : ''}
 <section class="detail-sec"><h2>うまく動かないとき</h2><p>${esc(g.play.note || '読み込みに時間がかかることがあります。音が出ない場合は一度ゲーム画面をクリックしてください。')} ゲームが始まらない場合はページを再読み込みしてください。</p></section>

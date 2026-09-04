@@ -434,6 +434,48 @@
       if (pre) pre.classList.toggle('wrapped');
     });
   });
+  // ---------------------------------------------------------- ゲームの読み込み状態
+  // 初回は20MBほど読み込むため、何も出ないと固まったように見える。
+  // pygame側が「Ready to start」を出すか canvas を作った時点で案内を消す。
+  (function () {
+    var box = doc.getElementById('play-loading');
+    var frame = doc.getElementById('game-frame');
+    var hint = doc.getElementById('play-hint');
+    if (!box || !frame) return;
+    box.hidden = false;
+    var done = false, tries = 0, slow = false;
+    function ready() {
+      if (done) return;
+      done = true;
+      box.hidden = true;
+      if (hint) hint.hidden = false;
+    }
+    function look() {
+      if (done) return;
+      try {
+        var d = frame.contentDocument;
+        if (d) {
+          var c = d.querySelector('canvas');
+          var t = (d.body && d.body.innerText) || '';
+          if ((c && c.width > 1) || t.indexOf('Ready to start') >= 0) return ready();
+        }
+      } catch (e) { return ready(); }  /* 中を見られない環境では案内を残さない */
+      tries++;
+      /* 時間がかかっているときは、準備完了のふりをせず文言だけ変える。
+         通信が遅いと数分かかることが実際にある。 */
+      if (tries === 75 && !slow) {
+        slow = true;
+        var b = box.querySelector('b'), sm = box.querySelector('small');
+        if (b) b.textContent = 'まだ読み込んでいます…';
+        if (sm) sm.textContent = '通信の状況によっては数分かかることがあります。このままお待ちください';
+      }
+      setTimeout(look, tries > 75 ? 1000 : 400);
+    }
+    setTimeout(look, 400);
+    /* 一度でも画面を触ったらヒントは役目を終える */
+    frame.addEventListener('pointerdown', function () { if (hint) hint.hidden = true; });
+  })();
+
   // 全画面（プレイページ）
   // iframe 単体ではなく外枠を全画面にする。iframe だけだと中のゲームが
   // 画面いっぱいに広がらず、黒地に小さく表示されてしまう。
