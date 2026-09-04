@@ -17,3 +17,6 @@
 *.apk binary
 *.tar.gz binary
 *.wasm binary
+
+# 同梱した pygbag ランタイムは配布元のバイト列をそのまま保つ（改行変換をしない）
+site/public/play-files/_cdn/** -text
