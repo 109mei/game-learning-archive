@@ -350,6 +350,41 @@ function imgSize(webPath) {
   return out;
 }
 const sizeAttr = u => { const d = imgSize(u); return d ? ` width="${d.w}" height="${d.h}"` : ''; };
+// ---------- 画像が無い作品の figure ----------
+// スクリーンショットが残っていない作品が7件ある。縞模様に作品名を重ねるだけでは
+// 一覧に並べたとき全部同じに見えるので、作品ごとに違う図形を組み立てて出す。
+// 見た目は id から決まる（毎回同じ絵になる。ランダムではない）。
+function phSeed(id) {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 1000) / 1000; };
+}
+// ジャンルごとに色を変える。同じジャンルは同じ色になり、一覧で手がかりになる
+const PH_HUE = {
+  'アクション': 168, 'ランアクション': 148, '釣りアクション': 190, 'シューティング': 8,
+  'カードゲーム': 268, 'テーブルゲーム': 288, 'クイズ': 44, '記憶ゲーム': 58,
+  'リズムゲーム': 320, '反射神経': 24, 'ミニゲーム': 208, '対戦パズル': 248,
+  'タイミングゲーム': 100, 'ゲームコレクション': 228,
+};
+function thumbArt(g) {
+  const r = phSeed(g.id);
+  const hue = PH_HUE[g.genre] != null ? PH_HUE[g.genre] : Math.round(r() * 360);
+  const cols = 8, rows = 5, cw = 640 / cols, ch = 400 / rows;
+  const cells = [];
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const v = r();
+    if (v < 0.42) continue;
+    const cx = x * cw, cy = y * ch;
+    const o = (0.10 + v * 0.26).toFixed(2);
+    cells.push(v > 0.86
+      ? `<circle cx="${(cx + cw / 2).toFixed(0)}" cy="${(cy + ch / 2).toFixed(0)}" r="${(cw * 0.26).toFixed(0)}" fill="hsl(${hue} 62% 62% / ${o})"/>`
+      : `<rect x="${cx.toFixed(0)}" y="${cy.toFixed(0)}" width="${cw.toFixed(0)}" height="${ch.toFixed(0)}" fill="hsl(${hue} 58% 55% / ${o})"/>`);
+  }
+  // 同じ作品が複数のプロジェクトに出るため、SVG内で id を使うと重複IDになる。
+  // 下の暗がりは CSS（.thumb-ph::after）で乗せる。
+  return `<svg class="ph-art" viewBox="0 0 640 400" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+    <rect width="640" height="400" fill="hsl(${hue} 34% 16%)"/>${cells.join('')}</svg>`;
+}
 // ---------- 操作デバイス ----------
 // 訪問者の多くはスマートフォンで見るため、開く前にキーボードの要否が分かるようにする。
 // 判定は controls の記述だけを根拠にし、勝手な推測はしない。
@@ -376,7 +411,7 @@ function gameCard(g) {
   const orgNames = (g.organizations || []).map(id => orgById[id]?.name).filter(Boolean);
   const thumb = g.thumbnail
     ? `<img src="${g.thumbnail}" alt="${esc(g.title)}のプレイ画面" loading="lazy" width="640" height="400">`
-    : `<div class="thumb-ph" role="img" aria-label="${esc(g.title)}（画像準備中）"><span class="ph-title">${esc(g.title)}</span><small>画像準備中</small></div>`;
+    : `<div class="thumb-ph" role="img" aria-label="${esc(g.title)}（画像準備中）">${thumbArt(g)}<span class="ph-title">${esc(g.title)}</span><small>画像準備中</small></div>`;
   return `<a class="card game-card" href="/games/${g.id}/" data-gid="${g.id}">
   <span class="dex-no">No.${dex(g.id)}</span><span class="stamp">発見済み</span>
   <div class="thumb">${thumb}${g.play?.playable ? badgePlay : ''}</div>
@@ -636,7 +671,7 @@ for (const g of games) {
   const topics = (g.learnTopics || []).map(s => learnBySlug[s]).filter(Boolean);
   const main = g.thumbnail
     ? `<img class="detail-hero" src="${g.thumbnail}" alt="${esc(g.title)}のプレイ画面" width="640" height="400">`
-    : `<div class="detail-hero thumb-ph"><span>🎮</span><small>画像準備中</small></div>`;
+    : `<div class="detail-hero thumb-ph" role="img" aria-label="${esc(g.title)}（画像準備中）">${thumbArt(g)}<span class="ph-title">${esc(g.title)}</span><small>画像準備中</small></div>`;
   const buttons = [
     g.play?.playable ? `<a class="btn btn-primary btn-lg" href="/play/${g.id}/">▶ ブラウザで遊ぶ</a>` : '',
     g.source?.available ? `<a class="btn btn-lg" href="/source/${g.id}/">&lt;/&gt; ソースコードを見る</a>` : '',
