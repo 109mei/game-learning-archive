@@ -508,12 +508,15 @@ function projectHead(a, n) {
 </div>
 <p class="result-count" id="count" role="status">${games.length} / ${games.length} 作品を表示中</p>`;
   const groups = projectGroups();
+  // 近道の一覧はゲームジャムとコンテストだけにする。高大連携やIDERIA制作まで並べると11件になり、絞り込みより先に4行を占めていた。
+  // 一覧そのもの（下のセクション）は全プロジェクトを出す。ここから外しても作品は消えない。
+  const jumpGroups = groups.filter(({ act }) => ['game-jam', 'contest'].includes(act.category));
   const content = `<div class="wrap page-pad">
 <h1 class="page-title">作品一覧</h1>
 <p class="page-lead">これまでの活動で生まれたゲーム作品 ${games.length} 件を、<strong>実施したプロジェクトごと</strong>にまとめています。1つの作品が複数のプロジェクトに出ることがあります。</p>
-<nav class="proj-jump" aria-label="プロジェクトから探す">
-  <span class="proj-jump-h">プロジェクトから探す</span>
-  ${groups.map(({ act, list }) => `<a href="#proj-${act.id}">${esc(act.title)}<b>${list.length}</b></a>`).join('')}
+<nav class="proj-jump" aria-label="ゲームジャム・コンテストから探す">
+  <span class="proj-jump-h">ゲームジャム・コンテストから探す</span>
+  ${jumpGroups.map(({ act, list }) => `<a href="#proj-${act.id}">${esc(act.title)}<b>${list.length}</b></a>`).join('')}
 </nav>
 ${filters}
 <p class="kbd-hint"><kbd>/</kbd> で検索欄へ移動、<kbd>Esc</kbd> で解除できます。</p>
